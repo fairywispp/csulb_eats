@@ -30,25 +30,31 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/category/:category" element={<Category />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/campus-map" element={<CampusMap />} />
-            <Route path="/location/:id" element={<LocationDetail />} />
-            <Route path="/restaurant/:id" element={<RestaurantDetail />} />
-            <Route path="/restaurant/caffeine-lab" element={<CaffeineLabDetail />} />
-            <Route path="/restaurant/chillside-cafe" element={<LocationDetail />} />
-            <Route path="/food-truck/:id" element={<FoodTruckDetail />} />
-            <Route path="/dining-halls" element={<DiningHalls />} />
-            <Route path="/dining-policies" element={<DiningPolicies />} />
-            <Route path="/dining-hours" element={<DiningHours />} />
-            <Route path="/meal-plans" element={<MealPlans />} />
-            <Route path="/dining-faq" element={<DiningFAQ />} />
-            <Route path="/dining-request" element={<DiningRequest />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/category/:category" element={<Category />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/campus-map" element={<CampusMap />} />
+          <Route path="/location/:id" element={<LocationDetail />} />
+          <Route path="/restaurant/:id" element={<RestaurantDetail />} />
+          <Route
+            path="/restaurant/caffeine-lab"
+            element={<CaffeineLabDetail />}
+          />
+          <Route
+            path="/restaurant/chillside-cafe"
+            element={<LocationDetail />}
+          />
+          <Route path="/food-truck/:id" element={<FoodTruckDetail />} />
+          <Route path="/dining-halls" element={<DiningHalls />} />
+          <Route path="/dining-policies" element={<DiningPolicies />} />
+          <Route path="/dining-hours" element={<DiningHours />} />
+          <Route path="/meal-plans" element={<MealPlans />} />
+          <Route path="/dining-faq" element={<DiningFAQ />} />
+          <Route path="/dining-request" element={<DiningRequest />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
