@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Moon, Sun, Search, X, Menu, UtensilsCrossed } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { SearchBar } from "@/components/SearchBar";
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Moon, Sun, Search, X, Menu, UtensilsCrossed } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { SearchBar } from '@/components/SearchBar';
 
 export function Header() {
   const [isDark, setIsDark] = useState(true);
   const [showSearch, setShowSearch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === "/";
+  const isHome = location.pathname === '/';
 
   const toggleTheme = () => {
     setIsDark(!isDark);
-    document.documentElement.classList.toggle("dark");
+    document.documentElement.classList.toggle('dark');
   };
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Dining Halls", path: "/dining-halls" },
-    { name: "Resources", path: "/resources" },
+    { name: 'Home', path: '/' },
+    { name: 'Dining Halls', path: '/dining-halls' },
+    { name: 'Resources', path: '/resources' },
   ];
 
   return (
@@ -43,8 +43,8 @@ export function Header() {
                 to={link.path}
                 className={`text-sm font-medium transition-colors hover:text-accent ${
                   location.pathname === link.path
-                    ? "text-accent"
-                    : "text-muted-foreground"
+                    ? 'text-accent'
+                    : 'text-muted-foreground'
                 }`}
               >
                 {link.name}
@@ -69,7 +69,11 @@ export function Header() {
               onClick={toggleTheme}
               className="rounded-full"
             >
-              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {isDark ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
             </Button>
             <Button
               variant="ghost"
@@ -93,8 +97,8 @@ export function Header() {
                   onClick={() => setShowMenu(false)}
                   className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-accent/10 ${
                     location.pathname === link.path
-                      ? "text-accent"
-                      : "text-muted-foreground"
+                      ? 'text-accent'
+                      : 'text-muted-foreground'
                   }`}
                 >
                   {link.name}

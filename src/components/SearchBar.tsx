@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from "react";
-import { Search, X } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-import { locations } from "@/data/locations";
-import { mockFoodTruckVendors } from "@/data/mockFoodTruckData";
+import { useState, useRef, useEffect } from 'react';
+import { Search, X } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
+import { locations } from '@/data/locations';
+import { mockFoodTruckVendors } from '@/data/mockFoodTruckData';
 
 interface SearchBarProps {
   onSearch?: (query: string) => void;
@@ -13,8 +13,13 @@ interface SearchBarProps {
   compact?: boolean;
 }
 
-export function SearchBar({ onSearch, className = "", placeholder = "Search dining locations...", compact = false }: SearchBarProps) {
-  const [query, setQuery] = useState("");
+export function SearchBar({
+  onSearch,
+  className = '',
+  placeholder = 'Search dining locations...',
+  compact = false,
+}: SearchBarProps) {
+  const [query, setQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const navigate = useNavigate();
@@ -23,12 +28,15 @@ export function SearchBar({ onSearch, className = "", placeholder = "Search dini
   // Close suggestions when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
         setShowSuggestions(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   // Update suggestions based on query
@@ -47,14 +55,16 @@ export function SearchBar({ onSearch, className = "", placeholder = "Search dini
         'thai-mex-cocina',
         'wetzels-pretzels',
         'habit-grill',
-        'nugget-grill-express'
+        'nugget-grill-express',
       ]);
 
       const vendorItems = mockFoodTruckVendors
         .filter((vendor) => allowedVendors.has(vendor.vendor_id))
         .map((vendor) => {
           const locMatch = locations.find(
-            (l) => l.id === vendor.vendor_id || l.name.toLowerCase() === vendor.name.toLowerCase()
+            (l) =>
+              l.id === vendor.vendor_id ||
+              l.name.toLowerCase() === vendor.name.toLowerCase()
           );
           return {
             id: vendor.vendor_id,
@@ -69,11 +79,13 @@ export function SearchBar({ onSearch, className = "", placeholder = "Search dini
       // Combine and de-duplicate by name
       const combined = [...nonFoodTruckLocations, ...vendorItems];
       const uniqueByName = Array.from(
-        combined.reduce((map, item) => {
-          const key = item.name.toLowerCase();
-          if (!map.has(key)) map.set(key, item);
-          return map;
-        }, new Map<string, any>()).values()
+        combined
+          .reduce((map, item) => {
+            const key = item.name.toLowerCase();
+            if (!map.has(key)) map.set(key, item);
+            return map;
+          }, new Map<string, any>())
+          .values()
       );
 
       const filtered = uniqueByName
@@ -81,7 +93,9 @@ export function SearchBar({ onSearch, className = "", placeholder = "Search dini
           return (
             item.name.toLowerCase().includes(searchLower) ||
             item.category?.toLowerCase().includes(searchLower) ||
-            item.tags?.some((tag: string) => tag.toLowerCase().includes(searchLower))
+            item.tags?.some((tag: string) =>
+              tag.toLowerCase().includes(searchLower)
+            )
           );
         })
         .slice(0, 5);
@@ -112,30 +126,32 @@ export function SearchBar({ onSearch, className = "", placeholder = "Search dini
     } else {
       navigate(`/restaurant/${item.id}`);
     }
-    setQuery("");
+    setQuery('');
     setShowSuggestions(false);
   };
 
   const handleClear = () => {
-    setQuery("");
+    setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
     if (onSearch) {
-      onSearch("");
+      onSearch('');
     }
   };
 
   return (
     <div ref={wrapperRef} className={`relative ${className}`}>
       <form onSubmit={handleSearch} className="relative">
-        <Search className={`absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground ${compact ? "h-4 w-4" : "h-5 w-5"}`} />
+        <Search
+          className={`absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground ${compact ? 'h-4 w-4' : 'h-5 w-5'}`}
+        />
         <Input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => query.trim() && setShowSuggestions(true)}
           placeholder={placeholder}
-          className={`${compact ? "h-10 pl-10 pr-10" : "h-14 pl-12 pr-12 text-lg"} w-full rounded-full border-2 bg-card shadow-card transition-smooth focus-visible:shadow-elevated`}
+          className={`${compact ? 'h-10 pl-10 pr-10' : 'h-14 pl-12 pr-12 text-lg'} w-full rounded-full border-2 bg-card shadow-card transition-smooth focus-visible:shadow-elevated`}
         />
         {query && (
           <Button
@@ -143,9 +159,9 @@ export function SearchBar({ onSearch, className = "", placeholder = "Search dini
             variant="ghost"
             size="icon"
             onClick={handleClear}
-            className={`absolute right-2 top-1/2 -translate-y-1/2 ${compact ? "h-6 w-6" : "h-8 w-8"} rounded-full`}
+            className={`absolute right-2 top-1/2 -translate-y-1/2 ${compact ? 'h-6 w-6' : 'h-8 w-8'} rounded-full`}
           >
-            <X className={compact ? "h-4 w-4" : "h-5 w-5"} />
+            <X className={compact ? 'h-4 w-4' : 'h-5 w-5'} />
           </Button>
         )}
       </form>
@@ -160,15 +176,19 @@ export function SearchBar({ onSearch, className = "", placeholder = "Search dini
               className="w-full flex items-center gap-4 p-4 hover:bg-accent/10 transition-smooth border-b border-border last:border-0 text-left"
             >
               {item.image && (
-                <img 
-                  src={item.image} 
+                <img
+                  src={item.image}
                   alt={item.name}
                   className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                 />
               )}
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-foreground truncate">{item.name}</p>
-                <p className="text-sm text-muted-foreground truncate">{item.category}</p>
+                <p className="font-semibold text-foreground truncate">
+                  {item.name}
+                </p>
+                <p className="text-sm text-muted-foreground truncate">
+                  {item.category}
+                </p>
               </div>
               <Search className="h-4 w-4 text-muted-foreground flex-shrink-0" />
             </button>

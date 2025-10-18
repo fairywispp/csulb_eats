@@ -9,15 +9,22 @@ interface CampusMapWidgetProps {
   directionsLink?: string;
 }
 
-export function CampusMapWidget({ locationName, campusLocation, imageSrc, directionsLink }: CampusMapWidgetProps) {
+export function CampusMapWidget({
+  locationName,
+  campusLocation,
+  imageSrc,
+  directionsLink,
+}: CampusMapWidgetProps) {
   const handleViewMap = () => {
-    const mapLink = directionsLink || 'https://map.concept3d.com/?id=1314#!ct/41689,42539,42540,42541,42542,44590?s/';
+    const mapLink =
+      directionsLink ||
+      'https://map.concept3d.com/?id=1314#!ct/41689,42539,42540,42541,42542,44590?s/';
     window.open(mapLink, '_blank');
   };
 
   return (
     <div className="overflow-hidden rounded-2xl bg-card shadow-elegant">
-      <div 
+      <div
         className="relative h-[280px] overflow-hidden cursor-pointer"
         onClick={handleViewMap}
       >
@@ -32,7 +39,9 @@ export function CampusMapWidget({ locationName, campusLocation, imageSrc, direct
         <div className="flex items-start gap-3 mb-3">
           <MapPin className="mt-0.5 h-5 w-5 text-accent flex-shrink-0" />
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-foreground truncate">{locationName}</p>
+            <p className="font-semibold text-foreground truncate">
+              {locationName}
+            </p>
             <p className="text-sm text-muted-foreground">{campusLocation}</p>
           </div>
         </div>
