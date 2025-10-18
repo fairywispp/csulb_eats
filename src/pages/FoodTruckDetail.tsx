@@ -2,35 +2,36 @@ import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Clock, MapPin, ExternalLink } from 'lucide-react';
-import { mockFoodTruckVendors, mockFoodTruckEvents, CURRENT_TIME } from '@/data/mockFoodTruckData';
+import {
+  mockFoodTruckVendors,
+  mockFoodTruckEvents,
+  CURRENT_TIME,
+} from '@/data/mockFoodTruckData';
 import { format } from 'date-fns';
 
 // Import all menu images
 import nuggetGrillExpress from '@/assets/food-trucks/nuggetgrill-express.jpg';
 
-
 // Detailed menu data for specific vendors
 export const vendorMenus = {
-  
   'nugget-grill-express': {
     type: 'external' as const,
     url: 'https://www.csulb.edu/beach-shops/nugget-menu',
-    heroImage: nuggetGrillExpress
+    heroImage: nuggetGrillExpress,
   },
   'wetzels-pretzels': {
     type: 'detailed' as const,
     sections: [], // Both 'Pretzels' and 'Pretzel Dips' sections removed
-  }
+  },
 };
-
 
 export default function FoodTruckDetail() {
   const { id } = useParams<{ id: string }>();
-  
-  const vendor = mockFoodTruckVendors.find(v => v.vendor_id === id);
+
+  const vendor = mockFoodTruckVendors.find((v) => v.vendor_id === id);
   const todayStr = format(CURRENT_TIME, 'yyyy-MM-dd');
   const todayEvent = mockFoodTruckEvents.find(
-    e => e.vendor_id === id && e.date === todayStr
+    (e) => e.vendor_id === id && e.date === todayStr
   );
 
   if (!vendor) {
@@ -53,15 +54,19 @@ export default function FoodTruckDetail() {
       {/* Hero Section */}
       <div className="relative h-[400px] overflow-hidden">
         <img
-          src={menuData && 'heroImage' || vendor.images.hero_photo}
+          src={(menuData && 'heroImage') || vendor.images.hero_photo}
           alt={vendor.name}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
-        
+
         <div className="absolute inset-0 flex flex-col justify-between p-6 container mx-auto">
           <Link to="/category/food-trucks">
-            <Button variant="ghost" size="sm" className="w-fit text-white hover:bg-white/20">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="w-fit text-white hover:bg-white/20"
+            >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Food Trucks
             </Button>
@@ -87,7 +92,9 @@ export default function FoodTruckDetail() {
                 </div>
                 <div className="flex items-center gap-3 bg-black/60 backdrop-blur-md p-3 rounded-xl border border-white/20">
                   <Clock className="h-5 w-5" />
-                  <span className="font-bold">{todayEvent.start_time} - {todayEvent.end_time}</span>
+                  <span className="font-bold">
+                    {todayEvent.start_time} - {todayEvent.end_time}
+                  </span>
                 </div>
               </div>
             )}
@@ -121,11 +128,14 @@ export default function FoodTruckDetail() {
                   <h3 className="text-3xl font-bold border-b-2 border-accent pb-3">
                     {section.title}
                   </h3>
-                  
+
                   {section.images ? (
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                       {section.images.map((item, itemIdx) => (
-                        <Card key={itemIdx} className="overflow-hidden hover:shadow-xl transition-shadow">
+                        <Card
+                          key={itemIdx}
+                          className="overflow-hidden hover:shadow-xl transition-shadow"
+                        >
                           <div className="aspect-square overflow-hidden">
                             <img
                               src={item.src}
@@ -134,8 +144,12 @@ export default function FoodTruckDetail() {
                             />
                           </div>
                           <CardContent className="p-4">
-                            <h4 className="font-bold text-lg mb-2">{item.name}</h4>
-                            <p className="text-sm text-muted-foreground">{item.description}</p>
+                            <h4 className="font-bold text-lg mb-2">
+                              {item.name}
+                            </h4>
+                            <p className="text-sm text-muted-foreground">
+                              {item.description}
+                            </p>
                           </CardContent>
                         </Card>
                       ))}
@@ -153,12 +167,17 @@ export default function FoodTruckDetail() {
                       )}
                       <div className="flex flex-col justify-center">
                         {section.description && (
-                          <p className="text-lg text-muted-foreground mb-4">{section.description}</p>
+                          <p className="text-lg text-muted-foreground mb-4">
+                            {section.description}
+                          </p>
                         )}
                         {section.items && (
                           <ul className="space-y-3">
                             {section.items.map((item, itemIdx) => (
-                              <li key={itemIdx} className="flex items-center gap-3">
+                              <li
+                                key={itemIdx}
+                                className="flex items-center gap-3"
+                              >
                                 <div className="w-2 h-2 rounded-full bg-accent flex-shrink-0" />
                                 <span className="text-lg">{item}</span>
                               </li>
@@ -174,7 +193,11 @@ export default function FoodTruckDetail() {
 
             {vendor.contact.website_url && (
               <div className="text-center mt-12 pt-12 border-t border-border">
-                <a href={vendor.contact.website_url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={vendor.contact.website_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button variant="outline" size="lg" className="gap-2">
                     <ExternalLink className="h-5 w-5" />
                     Visit Website for More
