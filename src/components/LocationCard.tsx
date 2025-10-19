@@ -98,6 +98,22 @@ export function LocationCard({ location }: LocationCardProps) {
           >
             <Link to={detailLink}>View Details</Link>
           </Button>
+          {location.links.menu && (
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className="flex-1 font-semibold hover:bg-accent/10 hover:text-accent hover:border-accent"
+            >
+              <a
+                href={location.links.menu}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Menu
+              </a>
+            </Button>  
+          )}
           {location.links.order && (
             <Button
               size="sm"
@@ -109,9 +125,26 @@ export function LocationCard({ location }: LocationCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {location.id === 'outpost-grill' ? 'Order Ahead' : 'Order Now'}
+                {location.id === 'outpost-grill' || location.id === 'shake-smart'
+                  ? 'Order Ahead' : 'Order Now'}
               </a>
             </Button>
+          )}
+          {location.links.directions && location.links.order === undefined && (
+            <Button
+              size="sm"
+              asChild
+              className="flex-1 font-semibold bg-accent hover:bg-accent/90 text-accent-foreground shadow-sm"
+            >
+               <a
+                href={location.links.directions}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get Directions
+              </a>
+            </Button>
+            
           )}
         </div>
       </div>
