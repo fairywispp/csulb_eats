@@ -11,6 +11,7 @@ import nuggetGrillExpressImg from '@/assets/restaurants/nuggetgrill-express-1.jp
 export interface Location {
   id: string;
   name: string;
+  rating: number;
   category: string;
   subcategory?: string;
   hours: {
@@ -31,6 +32,7 @@ export const locations: Location[] = [
   {
     id: 'outpost-grill',
     name: 'Outpost Grill',
+    rating: 4.6,
     category: 'Restaurants',
     subcategory: 'American',
     description:
@@ -44,7 +46,7 @@ export const locations: Location[] = [
       Sat: 'Closed',
       Sun: 'Closed',
     },
-    priceRange: '$5-15',
+    priceRange: '$10-20',
     image: outpostGrillImg,
     tags: ['Burgers', 'Breakfast', 'American', 'Pizza'],
     links: {
@@ -57,6 +59,7 @@ export const locations: Location[] = [
   {
     id: 'shake-smart',
     name: 'Shake Smart',
+    rating: 4.6,
     category: 'Restaurants',
     subcategory: 'Smoothies & Bowls',
     description:
@@ -82,6 +85,7 @@ export const locations: Location[] = [
   {
     id: 'caffeine-lab',
     name: 'Caffeine Lab',
+    rating: 4.6, // Placeholder
     category: 'Cafés',
     subcategory: 'Coffee & Energy Drinks',
     description:
@@ -107,6 +111,7 @@ export const locations: Location[] = [
   {
     id: 'nugget-grill-express',
     name: 'Nugget Grill Express',
+    rating: 4.4,
     category: 'Restaurants',
     subcategory: 'American',
     description: 'Quick American grill serving burgers, sandwiches, and more',
@@ -119,7 +124,7 @@ export const locations: Location[] = [
       Sat: 'Closed',
       Sun: 'Closed',
     },
-    priceRange: '$8-14',
+    priceRange: '$10-20',
     image: nuggetGrillExpressImg,
     tags: ['Burgers', 'Sandwiches', 'American'],
     links: {
@@ -131,6 +136,7 @@ export const locations: Location[] = [
   {
     id: 'habit-grill',
     name: 'Habit Grill Trailer',
+    rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Best Burgers',
     description: 'Chargrilled burgers, sandwiches, and fresh salads',
@@ -154,6 +160,7 @@ export const locations: Location[] = [
   {
     id: 'thai-mex-cocina',
     name: 'Thai Mex Cocina',
+    rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Fusion',
     description: 'Fusion of Thai and Mexican flavors in every bite',
@@ -173,6 +180,7 @@ export const locations: Location[] = [
   {
     id: 'crepes-bonaparte',
     name: 'Crepes Bonaparte',
+    rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Sweet Treats',
     description: 'Authentic French crepes, both sweet and savory',
@@ -192,6 +200,7 @@ export const locations: Location[] = [
   {
     id: 'wetzel-pretzel',
     name: "Wetzel's Pretzel",
+    rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Quick Bites',
     description: 'Fresh-baked pretzels with a variety of flavors and dips',
@@ -211,6 +220,7 @@ export const locations: Location[] = [
   {
     id: 'chillside-cafe',
     name: 'Chillside Café',
+    rating: 4.6, // Placeholder
     category: 'Cafés',
     subcategory: 'Coffee & Snacks',
     description: 'Coffee, pastries, and quick bites near student spaces.',
