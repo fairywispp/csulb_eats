@@ -1,39 +1,58 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarIcon, X, ExternalLink, ArrowLeft } from "lucide-react";
-import { format } from "date-fns";
-import { allergens, menuCycles, quickLinks, MenuItem as MenuItemType } from "@/data/diningMenus";
-import { cn } from "@/lib/utils";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Calendar } from '@/components/ui/calendar';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { CalendarIcon, X, ExternalLink, ArrowLeft } from 'lucide-react';
+import { format } from 'date-fns';
+import {
+  allergens,
+  menuCycles,
+  quickLinks,
+  MenuItem as MenuItemType,
+} from '@/data/diningMenus';
+import { cn } from '@/lib/utils';
 
 // Placeholder images for dining halls
 const hallImages: Record<string, string> = {
-  Parkside: "https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800",
-  Hillside: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
-  Beachside: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+  Parkside:
+    'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800',
+  Hillside: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800',
+  Beachside:
+    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800',
 };
 
 export default function DiningHalls() {
   const [date, setDate] = useState<Date>(new Date());
-  const [selectedMeal, setSelectedMeal] = useState<string>("all");
-  const [selectedHall, setSelectedHall] = useState<string>("Parkside");
+  const [selectedMeal, setSelectedMeal] = useState<string>('all');
+  const [selectedHall, setSelectedHall] = useState<string>('Parkside');
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [scrollY, setScrollY] = useState(0);
   const [weekPopoverOpen, setWeekPopoverOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleFilter = (allergen: string) => {
     setActiveFilters((prev) =>
-      prev.includes(allergen) ? prev.filter((a) => a !== allergen) : [...prev, allergen]
+      prev.includes(allergen)
+        ? prev.filter((a) => a !== allergen)
+        : [...prev, allergen]
     );
   };
 
@@ -41,15 +60,17 @@ export default function DiningHalls() {
 
   const filterItems = (items: MenuItemType[]) => {
     if (activeFilters.length === 0) return items;
-    return items.filter((item) => !item.allergens.some((a) => activeFilters.includes(a)));
+    return items.filter(
+      (item) => !item.allergens.some((a) => activeFilters.includes(a))
+    );
   };
 
   // Get current menu data
-  const dayName = format(date, "EEEE");
-  
+  const dayName = format(date, 'EEEE');
+
   // Find the menu cycle that contains this date
   const findMenuForDate = () => {
-    // For now, we'll use a simple approach: 
+    // For now, we'll use a simple approach:
     // Sep 29 week covers Sep 29 - Oct 5
     // If we add more weeks, we can enhance this logic
     for (const cycle of menuCycles) {
@@ -59,7 +80,7 @@ export default function DiningHalls() {
     }
     return menuCycles[0]; // fallback to first cycle
   };
-  
+
   const currentCycle = findMenuForDate();
   const hallMenu = currentCycle.days[dayName]?.[selectedHall];
 
@@ -70,7 +91,9 @@ export default function DiningHalls() {
 
       return (
         <div key={`${mealType}-${idx}`} className="mb-10">
-          <h3 className="mb-4 text-xl font-bold uppercase tracking-wide">{section.title}</h3>
+          <h3 className="mb-4 text-xl font-bold uppercase tracking-wide">
+            {section.title}
+          </h3>
           <div className="space-y-3">
             {filteredItems.map((item, itemIdx) => (
               <div
@@ -117,9 +140,9 @@ export default function DiningHalls() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
         <div className="container relative z-10 flex h-full flex-col justify-end px-4 pb-12">
           <Link to="/#browse-categories" className="inline-flex mb-4 w-fit">
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               className="gap-2 text-foreground/80 hover:text-foreground"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -139,11 +162,13 @@ export default function DiningHalls() {
           <aside className="w-full lg:sticky lg:top-4 lg:h-fit lg:w-64">
             <div className="rounded-lg border border-border bg-card p-6">
               <h2 className="mb-6 text-2xl font-bold">Filters</h2>
-              
+
               <div className="mb-6">
                 <h3 className="mb-4 text-lg font-semibold">Allergies</h3>
-                <p className="mb-4 text-sm text-muted-foreground">Hide Items Containing</p>
-                
+                <p className="mb-4 text-sm text-muted-foreground">
+                  Hide Items Containing
+                </p>
+
                 {activeFilters.length > 0 && (
                   <Button
                     variant="ghost"
@@ -162,8 +187,8 @@ export default function DiningHalls() {
                       key={allergen.code}
                       onClick={() => toggleFilter(allergen.code)}
                       className={cn(
-                        "flex w-full items-center gap-3 rounded-lg p-3 text-left transition-smooth hover:bg-accent",
-                        activeFilters.includes(allergen.code) && "bg-muted"
+                        'flex w-full items-center gap-3 rounded-lg p-3 text-left transition-smooth hover:bg-accent',
+                        activeFilters.includes(allergen.code) && 'bg-muted'
                       )}
                     >
                       <span
@@ -183,21 +208,25 @@ export default function DiningHalls() {
           {/* Main Content */}
           <div className="flex-1">
             {/* Dining Hall Tabs */}
-            <Tabs value={selectedHall} onValueChange={setSelectedHall} className="mb-0">
+            <Tabs
+              value={selectedHall}
+              onValueChange={setSelectedHall}
+              className="mb-0"
+            >
               <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1">
-                <TabsTrigger 
+                <TabsTrigger
                   value="Parkside"
                   className="data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
                 >
                   Parkside
                 </TabsTrigger>
-                <TabsTrigger 
+                <TabsTrigger
                   value="Hillside"
                   className="data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
                 >
                   Hillside
                 </TabsTrigger>
-                <TabsTrigger 
+                <TabsTrigger
                   value="Beachside"
                   className="data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
                 >
@@ -215,27 +244,37 @@ export default function DiningHalls() {
             <div className="mb-8 mt-6 flex flex-wrap items-center gap-4">
               <Popover open={weekPopoverOpen} onOpenChange={setWeekPopoverOpen}>
                 <PopoverTrigger asChild>
-                  <Button variant="outline" size="lg" className="min-w-[200px] h-12 justify-start gap-2 border-2 text-base font-semibold">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="min-w-[200px] h-12 justify-start gap-2 border-2 text-base font-semibold"
+                  >
                     Change Week
                     <CalendarIcon className="ml-auto h-5 w-5 text-accent" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-4" align="start">
                   <div className="space-y-2">
-                    <p className="text-sm font-semibold mb-3">Select Menu Week:</p>
+                    <p className="text-sm font-semibold mb-3">
+                      Select Menu Week:
+                    </p>
                     {[
-                      { date: new Date(2024, 9, 6), label: "Oct 6" },
-                      { date: new Date(2024, 9, 13), label: "Oct 13" },
-                      { date: new Date(2024, 9, 20), label: "Oct 20" },
-                      { date: new Date(2024, 9, 27), label: "Oct 27" },
-                      { date: new Date(2024, 10, 3), label: "Nov 3" },
-                      { date: new Date(2024, 10, 10), label: "Nov 10" },
-                      { date: new Date(2024, 10, 17), label: "Nov 17" },
-                      { date: new Date(2024, 11, 1), label: "Dec 1" },
+                      { date: new Date(2024, 9, 6), label: 'Oct 6' },
+                      { date: new Date(2024, 9, 13), label: 'Oct 13' },
+                      { date: new Date(2024, 9, 20), label: 'Oct 20' },
+                      { date: new Date(2024, 9, 27), label: 'Oct 27' },
+                      { date: new Date(2024, 10, 3), label: 'Nov 3' },
+                      { date: new Date(2024, 10, 10), label: 'Nov 10' },
+                      { date: new Date(2024, 10, 17), label: 'Nov 17' },
+                      { date: new Date(2024, 11, 1), label: 'Dec 1' },
                     ].map((week) => (
                       <Button
                         key={week.label}
-                        variant={date.toDateString() === week.date.toDateString() ? "default" : "outline"}
+                        variant={
+                          date.toDateString() === week.date.toDateString()
+                            ? 'default'
+                            : 'outline'
+                        }
                         className="w-full justify-start"
                         onClick={() => {
                           setDate(week.date);
@@ -252,8 +291,12 @@ export default function DiningHalls() {
               {/* Current Week Display */}
               <div className="min-w-[200px] h-12 px-4 bg-muted/50 rounded-md border-2 border-border flex items-center">
                 <div>
-                  <p className="text-xs text-muted-foreground leading-none mb-1">Current Date:</p>
-                  <p className="font-semibold text-sm leading-none">{format(date, "MMM d, yyyy")} • {dayName}</p>
+                  <p className="text-xs text-muted-foreground leading-none mb-1">
+                    Current Date:
+                  </p>
+                  <p className="font-semibold text-sm leading-none">
+                    {format(date, 'MMM d, yyyy')} • {dayName}
+                  </p>
                 </div>
               </div>
 
@@ -274,24 +317,30 @@ export default function DiningHalls() {
             <div className="space-y-12">
               {hallMenu ? (
                 <>
-                  {(selectedMeal === "all" || selectedMeal === "breakfast") && (
+                  {(selectedMeal === 'all' || selectedMeal === 'breakfast') && (
                     <div>
-                      <h2 className="mb-6 text-3xl font-bold text-accent">Breakfast</h2>
-                      {renderMenuSection(hallMenu.breakfast, "breakfast")}
+                      <h2 className="mb-6 text-3xl font-bold text-accent">
+                        Breakfast
+                      </h2>
+                      {renderMenuSection(hallMenu.breakfast, 'breakfast')}
                     </div>
                   )}
-                  
-                  {(selectedMeal === "all" || selectedMeal === "lunch") && (
+
+                  {(selectedMeal === 'all' || selectedMeal === 'lunch') && (
                     <div>
-                      <h2 className="mb-6 text-3xl font-bold text-accent">Lunch</h2>
-                      {renderMenuSection(hallMenu.lunch, "lunch")}
+                      <h2 className="mb-6 text-3xl font-bold text-accent">
+                        Lunch
+                      </h2>
+                      {renderMenuSection(hallMenu.lunch, 'lunch')}
                     </div>
                   )}
-                  
-                  {(selectedMeal === "all" || selectedMeal === "dinner") && (
+
+                  {(selectedMeal === 'all' || selectedMeal === 'dinner') && (
                     <div>
-                      <h2 className="mb-6 text-3xl font-bold text-accent">Dinner</h2>
-                      {renderMenuSection(hallMenu.dinner, "dinner")}
+                      <h2 className="mb-6 text-3xl font-bold text-accent">
+                        Dinner
+                      </h2>
+                      {renderMenuSection(hallMenu.dinner, 'dinner')}
                     </div>
                   )}
                 </>
@@ -318,7 +367,9 @@ export default function DiningHalls() {
                       <h3 className="text-lg font-semibold">{link.title}</h3>
                       <ExternalLink className="h-4 w-4 text-muted-foreground transition-smooth group-hover:text-accent" />
                     </div>
-                    <p className="text-sm text-muted-foreground">{link.description}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {link.description}
+                    </p>
                   </Link>
                 ))}
               </div>

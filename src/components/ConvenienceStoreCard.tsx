@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, ExternalLink } from "lucide-react";
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { MapPin, ExternalLink } from 'lucide-react';
 
 interface ConvenienceStoreCardProps {
   name: string;
@@ -10,14 +10,19 @@ interface ConvenienceStoreCardProps {
   tags: string[];
 }
 
-export function ConvenienceStoreCard({ name, image, mapLink, tags }: ConvenienceStoreCardProps) {
+export function ConvenienceStoreCard({
+  name,
+  image,
+  mapLink,
+  tags,
+}: ConvenienceStoreCardProps) {
   return (
     <Card className="overflow-hidden border-2 border-border hover:shadow-xl hover:border-accent transition-all">
       <CardContent className="p-0">
         {/* Image */}
         <div className="relative h-48 overflow-hidden">
-          <img 
-            src={image} 
+          <img
+            src={image}
             alt={name}
             className="h-full w-full object-cover transition-transform hover:scale-105"
           />
@@ -28,12 +33,12 @@ export function ConvenienceStoreCard({ name, image, mapLink, tags }: Convenience
         <div className="p-5 space-y-4">
           <div>
             <h3 className="text-xl font-bold mb-3">{name}</h3>
-            
+
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
-                <Badge 
-                  key={tag} 
+                <Badge
+                  key={tag}
                   variant="secondary"
                   className="text-xs font-medium"
                 >
@@ -44,12 +49,7 @@ export function ConvenienceStoreCard({ name, image, mapLink, tags }: Convenience
           </div>
 
           {/* Directions Button */}
-          <Button 
-            variant="default"
-            size="sm" 
-            className="w-full gap-2"
-            asChild
-          >
+          <Button variant="default" size="sm" className="w-full gap-2" asChild>
             <a href={mapLink} target="_blank" rel="noopener noreferrer">
               <MapPin className="h-4 w-4" />
               Get Directions

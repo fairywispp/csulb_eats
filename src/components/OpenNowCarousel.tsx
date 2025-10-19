@@ -1,14 +1,18 @@
-import { locations, isOpenNow } from "@/data/locations";
-import { LocationCard } from "@/components/LocationCard";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { locations, isOpenNow } from '@/data/locations';
+import { LocationCard } from '@/components/LocationCard';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 export function OpenNowCarousel() {
-  const openLocations = locations.filter((location) => isOpenNow(location.hours));
+  const openLocations = locations.filter((location) =>
+    isOpenNow(location.hours)
+  );
 
   if (openLocations.length === 0) {
     return (
       <div className="rounded-lg border border-dashed border-border bg-muted/50 p-8 text-center">
-        <p className="text-muted-foreground">No locations are currently open. Check back later!</p>
+        <p className="text-muted-foreground">
+          No locations are currently open. Check back later!
+        </p>
       </div>
     );
   }

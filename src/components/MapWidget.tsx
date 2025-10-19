@@ -43,7 +43,9 @@ export function MapWidget({ locationName, address, imageSrc }: MapWidgetProps) {
         <div className="flex items-start gap-3 mb-3">
           <MapPin className="mt-0.5 h-5 w-5 text-accent flex-shrink-0" />
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-foreground truncate">{locationName}</p>
+            <p className="font-semibold text-foreground truncate">
+              {locationName}
+            </p>
             <p className="text-sm text-muted-foreground">{address}</p>
           </div>
         </div>

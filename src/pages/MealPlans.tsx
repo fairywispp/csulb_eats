@@ -1,54 +1,54 @@
-import { Link } from "react-router-dom";
-import { ArrowLeft, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
+import { ArrowLeft, Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function MealPlans() {
   const plans = [
     {
-      name: "Unlimited Plan",
-      price: "$2,850/semester",
+      name: 'Unlimited Plan',
+      price: '$2,850/semester',
       features: [
-        "Unlimited access to all dining halls",
-        "Valid 7 days a week",
-        "No meal swipe limits",
-        "$100 dining dollars included",
-        "Guest passes: 5 per semester",
+        'Unlimited access to all dining halls',
+        'Valid 7 days a week',
+        'No meal swipe limits',
+        '$100 dining dollars included',
+        'Guest passes: 5 per semester',
       ],
       popular: true,
     },
     {
-      name: "15 Meals/Week",
-      price: "$2,400/semester",
+      name: '15 Meals/Week',
+      price: '$2,400/semester',
       features: [
-        "15 meal swipes per week",
-        "Resets every Sunday",
-        "Access to all dining halls",
-        "$75 dining dollars included",
-        "Guest passes: 3 per semester",
+        '15 meal swipes per week',
+        'Resets every Sunday',
+        'Access to all dining halls',
+        '$75 dining dollars included',
+        'Guest passes: 3 per semester',
       ],
       popular: false,
     },
     {
-      name: "10 Meals/Week",
-      price: "$1,950/semester",
+      name: '10 Meals/Week',
+      price: '$1,950/semester',
       features: [
-        "10 meal swipes per week",
-        "Resets every Sunday",
-        "Access to all dining halls",
-        "$50 dining dollars included",
-        "Guest passes: 2 per semester",
+        '10 meal swipes per week',
+        'Resets every Sunday',
+        'Access to all dining halls',
+        '$50 dining dollars included',
+        'Guest passes: 2 per semester',
       ],
       popular: false,
     },
     {
-      name: "Block 50",
-      price: "$650/semester",
+      name: 'Block 50',
+      price: '$650/semester',
       features: [
-        "50 meal swipes per semester",
-        "Never expires",
-        "Maximum flexibility",
-        "$25 dining dollars included",
-        "No guest passes",
+        '50 meal swipes per semester',
+        'Never expires',
+        'Maximum flexibility',
+        '$25 dining dollars included',
+        'No guest passes',
       ],
       popular: false,
     },
@@ -75,8 +75,8 @@ export default function MealPlans() {
               key={plan.name}
               className={`rounded-lg border p-6 ${
                 plan.popular
-                  ? "border-accent bg-accent/5"
-                  : "border-border bg-card"
+                  ? 'border-accent bg-accent/5'
+                  : 'border-border bg-card'
               }`}
             >
               {plan.popular && (
@@ -85,12 +85,16 @@ export default function MealPlans() {
                 </span>
               )}
               <h3 className="mb-2 text-xl font-bold">{plan.name}</h3>
-              <p className="mb-6 text-2xl font-bold text-accent">{plan.price}</p>
+              <p className="mb-6 text-2xl font-bold text-accent">
+                {plan.price}
+              </p>
               <ul className="space-y-3">
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-success" />
-                    <span className="text-sm text-muted-foreground">{feature}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>

@@ -1,8 +1,8 @@
-import { ArrowLeft, ZoomIn, ZoomOut } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import campusMapImage from "@/assets/campus-map.jpg";
+import { ArrowLeft, ZoomIn, ZoomOut } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import campusMapImage from '@/assets/campus-map.jpg';
 
 export default function CampusMap() {
   const [zoom, setZoom] = useState(1);
@@ -32,7 +32,7 @@ export default function CampusMap() {
               Find microwave locations across campus
             </p>
           </div>
-          
+
           {/* Zoom Controls */}
           <div className="flex gap-2">
             <Button
@@ -61,7 +61,10 @@ export default function CampusMap() {
               src={campusMapImage}
               alt="CSULB Campus Map showing microwave locations"
               className="w-full h-auto transition-transform duration-300"
-              style={{ transform: `scale(${zoom})`, transformOrigin: "top left" }}
+              style={{
+                transform: `scale(${zoom})`,
+                transformOrigin: 'top left',
+              }}
             />
           </div>
         </div>

@@ -1,7 +1,14 @@
-import { useParams, Link } from "react-router-dom";
-import { locations, isOpenNow } from "@/data/locations";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, FileText, Clock, DollarSign, Tag, ChevronLeft } from "lucide-react";
+import { useParams, Link } from 'react-router-dom';
+import { locations, isOpenNow } from '@/data/locations';
+import { Button } from '@/components/ui/button';
+import {
+  ExternalLink,
+  FileText,
+  Clock,
+  DollarSign,
+  Tag,
+  ChevronLeft,
+} from 'lucide-react';
 
 export default function LocationDetail() {
   const { id } = useParams();
@@ -19,20 +26,32 @@ export default function LocationDetail() {
   }
 
   const isOpen = isOpenNow(location.hours);
-  
+
   // Determine back link based on category
   const getCategoryLink = () => {
     const category = location.category.toLowerCase();
-    if (category.includes('restaurant') || category.includes('grill')) return '/category/restaurants';
-    if (category.includes('café') || category.includes('cafe') || category.includes('coffee')) return '/category/cafés';
+    if (category.includes('restaurant') || category.includes('grill'))
+      return '/category/restaurants';
+    if (
+      category.includes('café') ||
+      category.includes('cafe') ||
+      category.includes('coffee')
+    )
+      return '/category/cafés';
     if (category.includes('convenience')) return '/category/convenience-stores';
     return '/#browse-categories';
   };
-  
+
   const getCategoryName = () => {
     const category = location.category.toLowerCase();
-    if (category.includes('restaurant') || category.includes('grill')) return 'Restaurants';
-    if (category.includes('café') || category.includes('cafe') || category.includes('coffee')) return 'Cafés';
+    if (category.includes('restaurant') || category.includes('grill'))
+      return 'Restaurants';
+    if (
+      category.includes('café') ||
+      category.includes('cafe') ||
+      category.includes('coffee')
+    )
+      return 'Cafés';
     if (category.includes('convenience')) return 'Convenience Stores';
     return 'Home';
   };
@@ -40,7 +59,10 @@ export default function LocationDetail() {
   return (
     <div className="min-h-screen">
       <div className="container px-4 py-8">
-        <Link to={getCategoryLink()} className="mb-6 inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-smooth">
+        <Link
+          to={getCategoryLink()}
+          className="mb-6 inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-smooth"
+        >
           <ChevronLeft className="h-4 w-4" />
           Back to {getCategoryName()}
         </Link>
@@ -55,21 +77,27 @@ export default function LocationDetail() {
             />
             <div
               className={`absolute right-4 top-4 flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium ${
-                isOpen ? "bg-success text-success-foreground" : "bg-destructive text-destructive-foreground"
+                isOpen
+                  ? 'bg-success text-success-foreground'
+                  : 'bg-destructive text-destructive-foreground'
               }`}
             >
               <div className="h-2 w-2 rounded-full bg-white" />
-              {isOpen ? "Open Now" : "Closed"}
+              {isOpen ? 'Open Now' : 'Closed'}
             </div>
           </div>
 
           {/* Details */}
           <div>
             <div className="mb-6">
-              <p className="mb-2 text-sm font-medium text-accent">{location.category}</p>
+              <p className="mb-2 text-sm font-medium text-accent">
+                {location.category}
+              </p>
               <h1 className="mb-4 text-4xl font-bold">{location.name}</h1>
               {location.description && (
-                <p className="text-lg text-muted-foreground">{location.description}</p>
+                <p className="text-lg text-muted-foreground">
+                  {location.description}
+                </p>
               )}
             </div>
 
@@ -121,15 +149,28 @@ export default function LocationDetail() {
             <div className="flex gap-3">
               {location.links.menu && (
                 <Button variant="outline" asChild className="flex-1">
-                  <a href={location.links.menu} target="_blank" rel="noopener noreferrer" className="gap-2">
+                  <a
+                    href={location.links.menu}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="gap-2"
+                  >
                     <FileText className="h-4 w-4" />
                     View Menu
                   </a>
                 </Button>
               )}
               {location.links.order && (
-                <Button asChild className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground">
-                  <a href={location.links.order} target="_blank" rel="noopener noreferrer" className="gap-2">
+                <Button
+                  asChild
+                  className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground"
+                >
+                  <a
+                    href={location.links.order}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="gap-2"
+                  >
                     <ExternalLink className="h-4 w-4" />
                     Order Now
                   </a>

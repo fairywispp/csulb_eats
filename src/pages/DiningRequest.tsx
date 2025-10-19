@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { useToast } from '@/hooks/use-toast';
 
 export default function DiningRequest() {
   const { toast } = useToast();
@@ -13,8 +19,9 @@ export default function DiningRequest() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Request Submitted",
-      description: "We'll review your request and respond within 2-3 business days.",
+      title: 'Request Submitted',
+      description:
+        "We'll review your request and respond within 2-3 business days.",
     });
   };
 
@@ -37,7 +44,7 @@ export default function DiningRequest() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="rounded-lg border border-border bg-card p-6">
               <h2 className="mb-6 text-xl font-semibold">Your Information</h2>
-              
+
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="name">Full Name *</Label>
@@ -46,7 +53,12 @@ export default function DiningRequest() {
 
                 <div>
                   <Label htmlFor="email">Email Address *</Label>
-                  <Input id="email" type="email" required placeholder="student@csulb.edu" />
+                  <Input
+                    id="email"
+                    type="email"
+                    required
+                    placeholder="student@csulb.edu"
+                  />
                 </div>
 
                 <div>
@@ -58,7 +70,7 @@ export default function DiningRequest() {
 
             <div className="rounded-lg border border-border bg-card p-6">
               <h2 className="mb-6 text-xl font-semibold">Request Details</h2>
-              
+
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="diningHall">Dining Hall</Label>
@@ -84,7 +96,9 @@ export default function DiningRequest() {
                     <SelectContent>
                       <SelectItem value="feedback">General Feedback</SelectItem>
                       <SelectItem value="menu">Menu Suggestion</SelectItem>
-                      <SelectItem value="dietary">Dietary Accommodation</SelectItem>
+                      <SelectItem value="dietary">
+                        Dietary Accommodation
+                      </SelectItem>
                       <SelectItem value="complaint">Complaint</SelectItem>
                       <SelectItem value="compliment">Compliment</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
@@ -112,8 +126,9 @@ export default function DiningRequest() {
           <div className="mt-8 rounded-lg border border-border bg-accent/10 p-6">
             <h3 className="mb-3 text-lg font-semibold">Response Time</h3>
             <p className="text-muted-foreground">
-              We review all requests within 2-3 business days. For urgent matters, 
-              please contact Dining Services directly at (562) 985-5000.
+              We review all requests within 2-3 business days. For urgent
+              matters, please contact Dining Services directly at (562)
+              985-5000.
             </p>
           </div>
         </div>

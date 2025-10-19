@@ -1,30 +1,30 @@
-import { SearchBar } from "@/components/SearchBar";
-import { OpenNowCarousel } from "@/components/OpenNowCarousel";
-import { CategoryGrid } from "@/components/CategoryGrid";
-import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
+import { SearchBar } from '@/components/SearchBar';
+import { OpenNowCarousel } from '@/components/OpenNowCarousel';
+import { CategoryGrid } from '@/components/CategoryGrid';
+import { Link, useLocation } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { useEffect } from 'react';
 
 export default function Home() {
   const location = useLocation();
   useEffect(() => {
-    if (location.hash === "#browse-categories") {
+    if (location.hash === '#browse-categories') {
       setTimeout(() => {
-        const el = document.getElementById("browse-categories");
-        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        const el = document.getElementById('browse-categories');
+        el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 100);
     }
   }, [location]);
-  
+
   return (
     <div className="min-h-screen">
       {/* Hero Section with Image Overlay */}
       <section className="relative h-[600px] md:h-[700px] overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=1600&h=900&fit=crop" 
-            alt="Campus dining" 
+          <img
+            src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=1600&h=900&fit=crop"
+            alt="Campus dining"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
@@ -73,29 +73,33 @@ export default function Home() {
                 <div className="text-center space-y-4">
                   <div className="text-6xl mb-2">🥖</div>
                   <h4 className="font-bold text-xl">Subway Kitchen Trailer</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Fresh subs made your way</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Fresh subs made your way
+                  </p>
                 </div>
               </div>
               <div className="group relative overflow-hidden rounded-3xl bg-card border border-border hover:border-accent transition-all duration-300 shadow-card hover:shadow-elevated p-8 hover:-translate-y-1">
                 <div className="text-center space-y-4">
                   <div className="text-6xl mb-2">☕</div>
                   <h4 className="font-bold text-xl">Coastal Coffee</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Premium brews & pastries</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Premium brews & pastries
+                  </p>
                 </div>
               </div>
               <div className="group relative overflow-hidden rounded-3xl bg-card border border-border hover:border-accent transition-all duration-300 shadow-card hover:shadow-elevated p-8 hover:-translate-y-1">
                 <div className="text-center space-y-4">
                   <div className="text-6xl mb-2">🍵</div>
                   <h4 className="font-bold text-xl">Coffee Bean & Tea Leaf</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Artisan coffee & teas</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Artisan coffee & teas
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-
 
       {/* Categories Section */}
       <section id="browse-categories" className="py-12">
@@ -110,7 +114,9 @@ export default function Home() {
         <div className="container px-4">
           <div className="mb-6">
             <h2 className="text-2xl font-bold">Student Deals</h2>
-            <p className="text-muted-foreground">Exclusive discounts for students</p>
+            <p className="text-muted-foreground">
+              Exclusive discounts for students
+            </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {/* Fooda */}
@@ -119,7 +125,17 @@ export default function Home() {
                 <div className="flex items-start gap-4 mb-4">
                   <div className="h-16 w-16 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg overflow-hidden">
                     <svg viewBox="0 0 100 100" className="h-12 w-12">
-                      <text x="50" y="70" fontSize="60" fontWeight="bold" fill="white" textAnchor="middle" fontFamily="system-ui, -apple-system, sans-serif">f</text>
+                      <text
+                        x="50"
+                        y="70"
+                        fontSize="60"
+                        fontWeight="bold"
+                        fill="white"
+                        textAnchor="middle"
+                        fontFamily="system-ui, -apple-system, sans-serif"
+                      >
+                        f
+                      </text>
                     </svg>
                   </div>
                   <div>
@@ -127,10 +143,20 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Rotating popup restaurants every weekday. Check today's vendor!
+                  Rotating popup restaurants every weekday. Check today's
+                  vendor!
                 </p>
-                <Button variant="default" size="sm" className="w-full gap-2" asChild>
-                  <a href="https://www.fooda.com" target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="w-full gap-2"
+                  asChild
+                >
+                  <a
+                    href="https://www.fooda.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Learn More
                   </a>
                 </Button>
@@ -143,7 +169,16 @@ export default function Home() {
                 <div className="flex items-start gap-4 mb-4">
                   <div className="h-16 w-16 rounded-lg bg-gradient-to-br from-red-600 to-orange-600 flex items-center justify-center shadow-lg overflow-hidden">
                     <svg viewBox="0 0 100 100" className="h-10 w-10">
-                      <text x="15" y="55" fontSize="35" fontWeight="bold" fill="white" fontFamily="system-ui, -apple-system, sans-serif">GH</text>
+                      <text
+                        x="15"
+                        y="55"
+                        fontSize="35"
+                        fontWeight="bold"
+                        fill="white"
+                        fontFamily="system-ui, -apple-system, sans-serif"
+                      >
+                        GH
+                      </text>
                     </svg>
                   </div>
                   <div>
@@ -151,10 +186,20 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Student deals and campus delivery. Order food from your favorite restaurants!
+                  Student deals and campus delivery. Order food from your
+                  favorite restaurants!
                 </p>
-                <Button variant="default" size="sm" className="w-full gap-2" asChild>
-                  <a href="https://www.grubhub.com" target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="w-full gap-2"
+                  asChild
+                >
+                  <a
+                    href="https://www.grubhub.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Learn More
                   </a>
                 </Button>
@@ -168,24 +213,67 @@ export default function Home() {
                   {/* ID Card Icon */}
                   <div className="h-16 w-24 rounded-lg bg-card flex items-center justify-center border-2 border-border shadow-lg overflow-hidden">
                     <svg viewBox="0 0 160 100" className="h-full w-full">
-                      <rect x="4" y="4" width="152" height="92" rx="10" fill="currentColor" className="text-muted/30" />
-                      <circle cx="40" cy="50" r="18" fill="currentColor" className="text-muted/60" />
-                      <rect x="70" y="30" width="70" height="10" rx="4" fill="currentColor" className="text-muted/60" />
-                      <rect x="70" y="48" width="60" height="10" rx="4" fill="currentColor" className="text-muted/40" />
-                      <rect x="70" y="66" width="50" height="10" rx="4" fill="currentColor" className="text-muted/40" />
+                      <rect
+                        x="4"
+                        y="4"
+                        width="152"
+                        height="92"
+                        rx="10"
+                        fill="currentColor"
+                        className="text-muted/30"
+                      />
+                      <circle
+                        cx="40"
+                        cy="50"
+                        r="18"
+                        fill="currentColor"
+                        className="text-muted/60"
+                      />
+                      <rect
+                        x="70"
+                        y="30"
+                        width="70"
+                        height="10"
+                        rx="4"
+                        fill="currentColor"
+                        className="text-muted/60"
+                      />
+                      <rect
+                        x="70"
+                        y="48"
+                        width="60"
+                        height="10"
+                        rx="4"
+                        fill="currentColor"
+                        className="text-muted/40"
+                      />
+                      <rect
+                        x="70"
+                        y="66"
+                        width="50"
+                        height="10"
+                        rx="4"
+                        fill="currentColor"
+                        className="text-muted/40"
+                      />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-1">Student Tax Discount for Outpost</h3>
+                    <h3 className="text-xl font-bold mb-1">
+                      Student Tax Discount for Outpost
+                    </h3>
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   Show your student ID for tax off on all purchases
                 </p>
-                <Button variant="default" size="sm" className="w-full gap-2" asChild>
-                  <Link to="/restaurant/outpost-grill">
-                    View Outpost Grill
-                  </Link>
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="w-full gap-2"
+                  asChild
+                >
+                  <Link to="/restaurant/outpost-grill">View Outpost Grill</Link>
                 </Button>
               </div>
             </div>
@@ -219,10 +307,16 @@ export default function Home() {
               © 2025 CsulbEats. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <Link to="/resources" className="text-sm text-muted-foreground hover:text-foreground transition-smooth">
+              <Link
+                to="/resources"
+                className="text-sm text-muted-foreground hover:text-foreground transition-smooth"
+              >
                 Resources
               </Link>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-smooth">
+              <a
+                href="#"
+                className="text-sm text-muted-foreground hover:text-foreground transition-smooth"
+              >
                 Contact
               </a>
             </div>

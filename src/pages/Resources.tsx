@@ -1,55 +1,61 @@
-import { resources, studentDeals } from "@/data/locations";
-import { ExternalLink, MapPin, Calendar, MapPinIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapWidget } from "@/components/MapWidget";
-import { CampusMapWidget } from "@/components/CampusMapWidget";
-import wellnessCenter from "@/assets/locations/wellness-center.jpg";
-import bookstore from "@/assets/locations/bookstore.jpg";
-import beachHut from "@/assets/locations/beach-hut.jpg";
-import outpost from "@/assets/locations/outpost.jpg";
-import artStore from "@/assets/locations/art-store.jpg";
-import petersonHall from "@/assets/locations/peterson-hall.jpg";
-import foodaIcon from "@/assets/apps/fooda-icon.png";
-import grubhubIcon from "@/assets/apps/grubhub-icon.png";
+import { resources, studentDeals } from '@/data/locations';
+import { ExternalLink, MapPin, Calendar, MapPinIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { MapWidget } from '@/components/MapWidget';
+import { CampusMapWidget } from '@/components/CampusMapWidget';
+import wellnessCenter from '@/assets/locations/wellness-center.jpg';
+import bookstore from '@/assets/locations/bookstore.jpg';
+import beachHut from '@/assets/locations/beach-hut.jpg';
+import outpost from '@/assets/locations/outpost.jpg';
+import artStore from '@/assets/locations/art-store.jpg';
+import petersonHall from '@/assets/locations/peterson-hall.jpg';
+import foodaIcon from '@/assets/apps/fooda-icon.png';
+import grubhubIcon from '@/assets/apps/grubhub-icon.png';
 
 const beachPantryEvents = [
   {
     id: 1,
-    title: "Mobile Pantry - College Of Business Courtyard",
-    date: "Monday, October 6 at 12:00PM PDT",
-    location: "College Of Business Courtyard",
-    type: "Mobile Pantry"
+    title: 'Mobile Pantry - College Of Business Courtyard',
+    date: 'Monday, October 6 at 12:00PM PDT',
+    location: 'College Of Business Courtyard',
+    type: 'Mobile Pantry',
   },
   {
     id: 2,
-    title: "Mobile Pantry - Library Courtyard",
-    date: "Tuesday, October 7 at 12:00PM PDT",
-    location: "Library Courtyard",
-    type: "Mobile Pantry"
+    title: 'Mobile Pantry - Library Courtyard',
+    date: 'Tuesday, October 7 at 12:00PM PDT',
+    location: 'Library Courtyard',
+    type: 'Mobile Pantry',
   },
   {
     id: 3,
-    title: "Mobile Pantry - Macintosh Central Quad",
-    date: "Wednesday, October 8 at 3:00PM PDT",
-    location: "Macintosh Central Quad",
-    type: "Mobile Pantry"
+    title: 'Mobile Pantry - Macintosh Central Quad',
+    date: 'Wednesday, October 8 at 3:00PM PDT',
+    location: 'Macintosh Central Quad',
+    type: 'Mobile Pantry',
   },
   {
     id: 4,
-    title: "Taste of Tradition: Café de Olla & Churros",
-    date: "Wednesday, October 8 at 6:00PM PDT",
-    location: "ASI Beach Kitchen",
-    type: "Special Event"
-  }
+    title: 'Taste of Tradition: Café de Olla & Churros',
+    date: 'Wednesday, October 8 at 6:00PM PDT',
+    location: 'ASI Beach Kitchen',
+    type: 'Special Event',
+  },
 ];
 
 export default function Resources() {
-  const beachPantry = resources.find(r => r.id === "beach-pantry");
-  
+  const beachPantry = resources.find((r) => r.id === 'beach-pantry');
+
   const appIcons: { [key: string]: string } = {
-    "fooda": foodaIcon,
-    "grubhub": grubhubIcon
+    fooda: foodaIcon,
+    grubhub: grubhubIcon,
   };
 
   return (
@@ -73,8 +79,16 @@ export default function Resources() {
             </CardHeader>
             <CardContent>
               <div className="mb-6">
-                <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
-                  <a href={beachPantry.link} target="_blank" rel="noopener noreferrer" className="gap-2">
+                <Button
+                  asChild
+                  className="bg-accent text-accent-foreground hover:bg-accent/90"
+                >
+                  <a
+                    href={beachPantry.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="gap-2"
+                  >
                     Learn More <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>
@@ -106,7 +120,9 @@ export default function Resources() {
                           </div>
                           <div className="flex items-start gap-2">
                             <MapPinIcon className="h-3.5 w-3.5 mt-0.5 flex-shrink-0" />
-                            <span className="line-clamp-2">{event.location}</span>
+                            <span className="line-clamp-2">
+                              {event.location}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -133,9 +149,9 @@ export default function Resources() {
                   </CardTitle>
                   {appIcons[deal.id] && (
                     <div className="mt-4">
-                      <img 
-                        src={appIcons[deal.id]} 
-                        alt={`${deal.name} app icon`} 
+                      <img
+                        src={appIcons[deal.id]}
+                        alt={`${deal.name} app icon`}
                         className="h-16 w-16 object-contain"
                       />
                     </div>
@@ -145,13 +161,18 @@ export default function Resources() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button 
-                    variant="default" 
-                    size="sm" 
+                  <Button
+                    variant="default"
+                    size="sm"
                     asChild
                     className="bg-accent text-accent-foreground hover:bg-accent/90"
                   >
-                    <a href={deal.link} target="_blank" rel="noopener noreferrer" className="gap-2">
+                    <a
+                      href={deal.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="gap-2"
+                    >
                       Learn More <ExternalLink className="h-4 w-4" />
                     </a>
                   </Button>
