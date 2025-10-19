@@ -13,6 +13,7 @@ import nuggetGrillExpressImg from "@/assets/restaurants/nuggetgrill-express-1.jp
 export interface Location {
   id: string;
   name: string;
+  rating: number;
   category: string;
   subcategory?: string;
   hours: {
@@ -33,6 +34,7 @@ export const locations: Location[] = [
   {
     id: "outpost-grill",
     name: "Outpost Grill",
+    rating: 4.6,
     category: "Restaurants",
     subcategory: "American",
     description: "All-day American grill serving breakfast, charbroiled burgers, sandwiches, bowls, salads, and pizza. From fluffy pancakes to juicy burgers and signature pizzas, Outpost Grill has something for every craving.",
@@ -45,7 +47,7 @@ export const locations: Location[] = [
       Sat: "Closed",
       Sun: "Closed",
     },
-    priceRange: "$5-15",
+    priceRange: "$10-20",
     image: outpostGrillImg,
     tags: ["Burgers", "Breakfast", "American", "Pizza"],
     links: {
@@ -57,6 +59,7 @@ export const locations: Location[] = [
   {
     id: "shake-smart",
     name: "Shake Smart",
+    rating: 4.6,
     category: "Restaurants",
     subcategory: "Smoothies & Bowls",
     description: "Premium smoothies, protein shakes, and acai bowls made with fresh ingredients. Perfect for a healthy meal or post-workout refuel with customizable options to fit your nutritional goals.",
@@ -81,6 +84,7 @@ export const locations: Location[] = [
   {
     id: "caffeine-lab",
     name: "Caffeine Lab",
+    rating: 4.5, //Placeholder
     category: "Cafés",
     subcategory: "Coffee & Energy Drinks",
     description: "Specialty coffee and energy drinks in a modern setting. Perfect spot for studying or grabbing a quick caffeine boost between classes.",
@@ -104,6 +108,7 @@ export const locations: Location[] = [
   {
     id: "nugget-grill-express",
     name: "Nugget Grill Express",
+    rating: 4.4,
     category: "Restaurants",
     subcategory: "American",
     description: "Quick American grill serving burgers, sandwiches, and more",
@@ -128,6 +133,7 @@ export const locations: Location[] = [
   {
     id: "habit-grill",
     name: "Habit Grill Trailer",
+    rating: 4.5, //Placeholder
     category: "Food Trucks",
     subcategory: "Best Burgers",
     description: "Chargrilled burgers, sandwiches, and fresh salads",
@@ -151,6 +157,7 @@ export const locations: Location[] = [
   {
     id: "thai-mex-cocina",
     name: "Thai Mex Cocina",
+    rating: 4.5, // Placeholder
     category: "Food Trucks",
     subcategory: "Fusion",
     description: "Fusion of Thai and Mexican flavors in every bite",
@@ -170,6 +177,7 @@ export const locations: Location[] = [
   {
     id: "crepes-bonaparte",
     name: "Crepes Bonaparte",
+    rating: 4.5, // Placeholder,
     category: "Food Trucks",
     subcategory: "Sweet Treats",
     description: "Authentic French crepes, both sweet and savory",
@@ -189,6 +197,7 @@ export const locations: Location[] = [
   {
     id: "wetzel-pretzel",
     name: "Wetzel's Pretzel",
+    rating: 4.5, // Placeholder,
     category: "Food Trucks",
     subcategory: "Quick Bites",
     description: "Fresh-baked pretzels with a variety of flavors and dips",
@@ -208,6 +217,7 @@ export const locations: Location[] = [
   {
     id: "chillside-cafe",
     name: "Chillside Café",
+    rating: 4.5, // Placeholder,
     category: "Cafés",
     subcategory: "Coffee & Snacks",
     description: "Coffee, pastries, and quick bites near student spaces.",
@@ -277,7 +287,7 @@ export function isOpenNow(hours: { [key: string]: string }): boolean {
   // Parse time strings like "8:00 AM - 8:00 PM"
   const timePattern = /(\d+):(\d+)\s*(AM|PM)\s*-\s*(\d+):(\d+)\s*(AM|PM)/i;
   const match = todayHours.match(timePattern);
-  
+
   if (!match) return false;
 
   let openHour = parseInt(match[1]);
@@ -303,14 +313,14 @@ export function getNextOpeningTime(hours: { [key: string]: string }): string {
   const now = new Date();
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const currentDay = days[now.getDay()];
-  
+
   // Check if open today
   const todayHours = hours[currentDay];
   if (todayHours) {
     const [open] = todayHours.split("-");
     return `Opens ${currentDay} at ${open}`;
   }
-  
+
   // Find next open day
   for (let i = 1; i <= 7; i++) {
     const nextDayIndex = (now.getDay() + i) % 7;
@@ -320,6 +330,6 @@ export function getNextOpeningTime(hours: { [key: string]: string }): string {
       return `Opens ${nextDay} at ${open}`;
     }
   }
-  
+
   return "Hours not available";
 }

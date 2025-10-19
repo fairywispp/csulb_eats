@@ -220,22 +220,22 @@ export default function RestaurantDetail() {
 
   const isOpen = isOpenNow(location.hours);
   const openingTime = getNextOpeningTime(location.hours);
-  const avgRating = 4.5;
+  const avgRating = location.rating;
   const totalReviews = mockReviews.length;
   const isFoodTruck = location.category === "Food Trucks";
-  
+
   // Select menu based on location
-  const menuItems = location.id === "shake-smart" 
+  const menuItems = location.id === "shake-smart"
     ? Object.fromEntries(
-        shakeSmartMenu.map(category => [
-          category.name,
-          category.items.map(item => ({
-            name: item.name,
-            price: `$${item.price.toFixed(2)}`,
-            description: item.description
-          }))
-        ])
-      )
+      shakeSmartMenu.map(category => [
+        category.name,
+        category.items.map(item => ({
+          name: item.name,
+          price: `$${item.price.toFixed(2)}`,
+          description: item.description
+        }))
+      ])
+    )
     : outpostMenuItems;
 
   return (
@@ -260,9 +260,8 @@ export default function RestaurantDetail() {
               {location.name}
             </h1>
             <div className="flex flex-wrap items-center gap-3">
-              <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-semibold ${
-                isOpen ? "bg-success text-white" : "bg-muted text-muted-foreground"
-              }`}>
+              <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-semibold ${isOpen ? "bg-success text-white" : "bg-muted text-muted-foreground"
+                }`}>
                 <span className={`h-2 w-2 rounded-full ${isOpen ? "bg-white" : "bg-muted-foreground"}`} />
                 {isOpen ? "Open Now" : "Closed"}
               </span>
@@ -286,7 +285,7 @@ export default function RestaurantDetail() {
             {/* Quick Info Card */}
             <div className="rounded-xl border border-border bg-card p-6">
               <h3 className="mb-4 text-lg font-bold">Quick Info</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
@@ -372,15 +371,15 @@ export default function RestaurantDetail() {
 
             {/* Map Widget */}
             {["outpost-grill", "shake-smart"].includes(location.id) || isFoodTruck ? (
-              <CampusMapWidget 
+              <CampusMapWidget
                 locationName={location.name}
                 campusLocation={location.id === "habit-grill" ? "Lower Campus" : "Upper Campus"}
                 directionsLink={location.links.directions}
               />
             ) : (
-              <MapWidget 
-                locationName={location.name} 
-                address="6049 E 7th St, Long Beach, CA 90840" 
+              <MapWidget
+                locationName={location.name}
+                address="6049 E 7th St, Long Beach, CA 90840"
               />
             )}
           </aside>
@@ -423,7 +422,7 @@ export default function RestaurantDetail() {
                   )}
                 </div>
               </div>
-              
+
               <div className="space-y-6">
                 {Object.entries(menuItems).map(([category, items]) => (
                   <div key={category}>
