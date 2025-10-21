@@ -2,8 +2,12 @@ import { SearchBar } from '@/components/SearchBar';
 import { OpenNowCarousel } from '@/components/OpenNowCarousel';
 import { CategoryGrid } from '@/components/CategoryGrid';
 import { Link, useLocation } from 'react-router-dom';
+import { ExternalLink, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect } from 'react';
+import { MapWidget } from '@/components/MapWidget';
+import FoodaLogo from '@/assets/apps/fooda-icon.png';
+import GrubHubLogo from '@/assets/apps/grubhub-icon.png';
 
 export default function Home() {
   const location = useLocation();
@@ -124,19 +128,11 @@ export default function Home() {
               <div className="p-6">
                 <div className="flex items-start gap-4 mb-4">
                   <div className="h-16 w-16 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg overflow-hidden">
-                    <svg viewBox="0 0 100 100" className="h-12 w-12">
-                      <text
-                        x="50"
-                        y="70"
-                        fontSize="60"
-                        fontWeight="bold"
-                        fill="white"
-                        textAnchor="middle"
-                        fontFamily="system-ui, -apple-system, sans-serif"
-                      >
-                        f
-                      </text>
-                    </svg>
+                    <img
+                      src={FoodaLogo}
+                      alt="Fooda logo"
+                      className="h-24 w-24 object-cover scale-105"
+                    />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-1">Fooda</h3>
@@ -146,20 +142,38 @@ export default function Home() {
                   Rotating popup restaurants every weekday. Check today's
                   vendor!
                 </p>
-                <Button
-                  variant="default"
-                  size="sm"
-                  className="w-full gap-2"
-                  asChild
-                >
-                  <a
-                    href="https://www.fooda.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <div className="flex gap-2 pt-1">
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="w-full gap-2"
+                    asChild
                   >
-                    Learn More
-                  </a>
-                </Button>
+                    <a
+                      href="https://www.fooda.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Learn More
+                    </a>
+                  </Button>
+
+                  <Button
+                    variant="default"
+                    size="sm"
+                    asChild
+                    className="bg-accent text-accent-foreground hover:bg-accent/90"
+                  >
+                    <a
+                      href="https://www.fooda.com/consumer-tech-features"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="gap-2"
+                    >
+                      Download <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -168,18 +182,11 @@ export default function Home() {
               <div className="p-6">
                 <div className="flex items-start gap-4 mb-4">
                   <div className="h-16 w-16 rounded-lg bg-gradient-to-br from-red-600 to-orange-600 flex items-center justify-center shadow-lg overflow-hidden">
-                    <svg viewBox="0 0 100 100" className="h-10 w-10">
-                      <text
-                        x="15"
-                        y="55"
-                        fontSize="35"
-                        fontWeight="bold"
-                        fill="white"
-                        fontFamily="system-ui, -apple-system, sans-serif"
-                      >
-                        GH
-                      </text>
-                    </svg>
+                    <img
+                      src={GrubHubLogo}
+                      alt="GrubHub Logo"
+                      className="h-24 w-24 object-cover"
+                    />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-1">GrubHub</h3>
@@ -189,20 +196,38 @@ export default function Home() {
                   Student deals and campus delivery. Order food from your
                   favorite restaurants!
                 </p>
-                <Button
-                  variant="default"
-                  size="sm"
-                  className="w-full gap-2"
-                  asChild
-                >
-                  <a
-                    href="https://www.grubhub.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <div className="flex gap-2 pt-1">
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="w-full gap-2"
+                    asChild
                   >
-                    Learn More
-                  </a>
-                </Button>
+                    <a
+                      href="https://www.grubhub.com/mobile_home"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Learn More
+                    </a>
+                  </Button>
+
+                  <Button
+                    variant="default"
+                    size="sm"
+                    asChild
+                    className="bg-accent text-accent-foreground hover:bg-accent/90"
+                  >
+                    <a
+                      href="https://www.grubhub.com/lets-eat"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="gap-2"
+                    >
+                      Download <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -267,14 +292,33 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground mb-4">
                   Show your student ID for tax off on all purchases
                 </p>
-                <Button
-                  variant="default"
-                  size="sm"
-                  className="w-full gap-2"
-                  asChild
-                >
-                  <Link to="/restaurant/outpost-grill">View Outpost Grill</Link>
-                </Button>
+                <div className="flex gap-2 pt-1">
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="w-full gap-2"
+                    asChild
+                  >
+                    <Link to="/restaurant/outpost-grill">
+                      View Outpost Grill
+                    </Link>
+                  </Button>
+
+                  <Button
+                    variant="default"
+                    size="sm"
+                    onClick={() =>
+                      window.open(
+                        'https://map.concept3d.com/?id=1314#!m/420437',
+                        '_blank'
+                      )
+                    }
+                    className="bg-accent text-accent-foreground hover:bg-accent/90"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    View Campus Map
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
