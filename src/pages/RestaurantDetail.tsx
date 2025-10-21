@@ -613,7 +613,7 @@ export default function RestaurantDetail() {
 
   const isOpen = isOpenNow(location.hours);
   const openingTime = getNextOpeningTime(location.hours);
-  const avgRating = 4.5;
+  const avgRating = location.rating;
   const totalReviews = mockReviews.length;
   const isFoodTruck = location.category === 'Food Trucks';
 
