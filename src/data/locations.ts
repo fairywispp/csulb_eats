@@ -145,7 +145,6 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Best Burgers',
-    mapLabel: '',
     description: 'Chargrilled burgers, sandwiches, and fresh salads',
     hours: {
       Mon: '10:00 AM - 2:00 PM',
@@ -170,7 +169,6 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Fusion',
-    mapLabel: '',
     description: 'Fusion of Thai and Mexican flavors in every bite',
     hours: {
       Mon: '11:00-14:00',
@@ -191,7 +189,6 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Sweet Treats',
-    mapLabel: '',
     description: 'Authentic French crepes, both sweet and savory',
     hours: {
       Mon: '11:00-14:00',
@@ -212,7 +209,6 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Quick Bites',
-    mapLabel: '',
     description: 'Fresh-baked pretzels with a variety of flavors and dips',
     hours: {
       Mon: '10:00-15:00',
@@ -233,7 +229,6 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Cafés',
     subcategory: 'Coffee & Snacks',
-    mapLabel: '',
     description: 'Coffee, pastries, and quick bites near student spaces.',
     hours: {
       Mon: '8:00 AM - 4:00 PM',
