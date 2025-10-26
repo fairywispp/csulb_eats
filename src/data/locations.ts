@@ -126,7 +126,7 @@ export const locations: Location[] = [
     },
     priceRange: '$10-20',
     image: nuggetGrillExpressImg,
-    tags: ['Burgers', 'Sandwiches', 'American'],
+    tags: ['Breakfast', 'Burrito', 'Sandwiches', 'American'],
     links: {
       menu: "https://order.toasttab.com/online/the-nugget-trailer-6049-east-7th-street",
       order: undefined,

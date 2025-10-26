@@ -2,6 +2,7 @@ export interface MenuItem {
   name: string;
   price: number;
   description: string;
+  tags?: string[];
 }
 
 export interface MenuCategory {
@@ -17,109 +18,130 @@ export const shakeSmartMenu: MenuCategory[] = [
         name: 'Chocolate Frosty',
         price: 7.25,
         description: 'wendy has nothing on us',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'Vanilla Thrilla',
         price: 7.25,
         description: 'the bean that gets you lean!',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: "Cookies n' Cream",
         price: 7.25,
         description: 'need we say more?',
+        tags: ["Protein Shakes", "Smoothies"]
       },
       {
         name: 'Shake Your Coffee',
         price: 7.25,
         description: 'cold brew coffee plus protein',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'Strawberry Fields',
         price: 8.25,
         description: 'strawberry, vanilla protein',
+        tags: ["Protein Shakes", "Smoothis", "Healthy"]
       },
       {
         name: 'Banana Split',
         price: 8.25,
         description: 'strawberry, banana, chocolate protein',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'P-B Squared',
         price: 8.25,
         description: 'banana, chocolate protein, all natural peanut butter',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: "Grammy's Goods",
         price: 8.25,
         description: "cookies n' cream protein, all natural peanut butter",
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'Matcha Mentality',
         price: 8.25,
         description: 'green tea matcha, vanilla protein',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'Greens to Go',
         price: 8.75,
         description: 'spinach, banana, pineapple, orange juice, protein',
+        tags: ["Protein Shakes", "Smoothis", "Healthy"]
       },
       {
         name: 'Carrot Cake',
         price: 8.75,
         description: 'cinnamon, banana, carrot juice, vanilla protein',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'Organic Supershake',
         price: 9.25,
         description:
           'organic superfood, banana, vanilla protein, all natural peanut butter',
+          tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'A Perfect 10',
         price: 8.75,
         description:
           'blueberry, banana, vanilla protein, all natural peanut butter',
+          tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'Acai Energy',
         price: 8.75,
         description: 'acai, banana, vanilla protein, all natural peanut butter',
+        tags: ["Protein Shakes", "Smoothies", "Healthy", "Acai Bowls"]
       },
       {
         name: 'Chocolate Covered Strawberry',
         price: 8.75,
         description: 'strawberry, acai, chocolate protein',
+        tags: ["Protein Shakes", "Smoothies", "Healthy", "Acai Bowls"]
       },
       {
         name: 'Breakfast to Go',
         price: 8.75,
         description:
           'strawberry, pineapple, acai, orange juice, vanilla protein',
+          tags: ["Protein Shakes", "Smoothies", "Healthy", "Acai Bowls"]
       },
       {
         name: 'Fruitopia',
         price: 8.75,
         description: 'strawberry, banana, acai, apple juice, protein',
+        tags: ["Protein Shakes", "Smoothies", "Healthy", "Acai Bowls"]
       },
       {
         name: 'Mea Aloha',
         price: 8.75,
         description: 'pineapple, banana, acai, apple juice, protein',
+        tags: ["Protein Shakes", "Smoothies", "Healthy", "Acai Bowls"]
       },
       {
         name: 'Pink Cadillac',
         price: 8.75,
         description: 'pitaya, pineapple, orange juice, vanilla protein',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'Shake Your Smoothie',
         price: 8.75,
         description: 'caution: you picked them, not us!',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
       {
         name: 'Shake of the Month',
         price: 8.75,
         description: 'ask a team member for more details!',
+        tags: ["Protein Shakes", "Smoothies", "Healthy"]
       },
     ],
   },
@@ -131,42 +153,49 @@ export const shakeSmartMenu: MenuCategory[] = [
         price: 9.75,
         description:
           'scoops of organic acai, strawberry, topped with granola, banana slices, chia, and coconut flakes',
+        tags: ["Acai Bowls", "Healthy"]
       },
       {
         name: 'Raw-PB Acai Bowl',
         price: 9.75,
         description:
           'scoops of organic acai, topped with granola, banana slices, dark chocolate, and all natural peanut butter',
+        tags: ["Acai Bowls", "Healthy"]
       },
       {
         name: 'The Buzz Bowl',
         price: 9.75,
         description:
           'scoops of organic acai, pitaya, pineapple, topped with granola, coconut flakes, and bee pollen',
+        tags: ["Acai Bowls", "Healthy"]
       },
       {
         name: 'Build Your Bowl',
         price: 9.95,
         description:
           'scoops of organic acai, including not one, not two, not three, but four toppings crafted by you!',
+        tags: ["Acai Bowls", "Healthy"]
       },
       {
         name: 'Original Acai Bowl',
         price: 9.75,
         description:
           'organic acai, strawberry, apple juice, protein, topped with granola, coconut, and banana slices',
+        tags: ["Acai Bowls", "Healthy"]
       },
       {
         name: 'PB&A Acai Bowl',
         price: 9.75,
         description:
           'organic acai, strawberry, almond milk, protein, all natural peanut butter, topped with granola, banana slices, and dark chocolate',
+        tags: ["Acai Bowls", "Healthy"]
       },
       {
         name: 'Dragon Bowl',
         price: 9.75,
         description:
           'pitaya, pineapple, orange juice, vanilla protein, topped with granola, chia, and coconut flakes',
+        tags: ["Acai Bowls", "Healthy"]
       },
     ],
   },
@@ -178,30 +207,35 @@ export const shakeSmartMenu: MenuCategory[] = [
         price: 4.95,
         description:
           'all natural peanut butter, hemp seeds, cinnamon, banana slices',
+        tags: ["Healthy"]
       },
       {
         name: 'Almond Butter Toast',
         price: 5.45,
         description:
           'all natural almond butter, hemp seeds, cinnamon, banana slices',
+        tags: ["Healthy"]
       },
       {
         name: 'Avocado Toast',
         price: 6.25,
         description:
           'mashed avocados, crumbled feta, sun dried tomatoes, himalayan sea salt, lemon crystals, crushed red pepper',
+        tags: ["Healthy"]
       },
       {
         name: 'Hummus Toast',
         price: 6.25,
         description:
           'hummus, crumbled feta, sun dried tomatoes, himalayan sea salt, lemon crystals, crushed red pepper',
+        tags: ["Healthy"]
       },
       {
         name: 'Tuna Toast',
         price: 6.25,
         description:
           'tuna, carrot, onion, celery, swiss cheese, choice of mustard, himalayan sea salt',
+        tags: ["Healthy"]
       },
     ],
   },

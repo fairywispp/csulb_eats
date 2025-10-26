@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { locations, isOpenNow, getNextOpeningTime } from '@/data/locations';
 import { shakeSmartMenu } from '@/data/shakeSmartMenu';
+import { nuggetGrillExpressMenu } from '@/data/nuggetGrillExpressMenu';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -11,10 +12,12 @@ import {
   MapPin,
   Star,
 } from 'lucide-react';
+import { useState, useMemo } from "react";
 import { MapWidget } from '@/components/MapWidget';
 import { CampusMapWidget } from '@/components/CampusMapWidget';
 import { Separator } from '@/components/ui/separator';
 import { Calendar } from 'lucide-react';
+import React from 'react';
 
 const foodTruckSchedule = [
   {
@@ -91,6 +94,7 @@ interface MenuItem {
   price: string;
   description: string;
   image?: string;
+  tags?: string[];
 }
 
 const outpostMenuItems: Record<string, MenuItem[]> = {
@@ -100,36 +104,42 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$5.29',
       description:
         'Two pancakes served with whipped butter. Contains milk, soy, and wheat',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'French Toast',
       price: '$6.99',
       description:
         'Two slices of double-thick white bread, served with whipped butter. Contains eggs, soy, and wheat',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'Two Eggs w/Meat',
       price: '$10.79',
       description:
         'Two eggs any style, choice of meat (smoked bacon, sausage, turkey sausage, or Spam), served with hash browns and choice of toast. Contains eggs, soy, and wheat',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'Two Eggs Breakfast',
       price: '$8.29',
       description:
         'Two eggs any style, hash browns and choice of toast. Contains eggs, soy, and wheat',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'Cheddar Cheese Omelet',
       price: '$7.99',
       description:
         'Two egg omelet with cheddar cheese and choice of meat, served with hash browns. Contains eggs, milk, and soy',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'Feta Cheese Omelet',
       price: '$7.99',
       description:
         'Two egg omelet with feta cheese, spinach, tomato, served with hash browns. Contains eggs, milk, and soy',
+      tags: ["Breakfast", "American"]
     },
   ],
   'Breakfast Sandwiches': [
@@ -138,18 +148,21 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$7.99',
       description:
         'Over hard egg, honey Dijon mustard, tomato, cucumber & red onion, on an everything bagel. Contains eggs, wheat, soy, and sesame seeds',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'The B.E.T. Bagel Sandwich',
       price: '$9.99',
       description:
         'Over hard egg, smoked bacon, cheddar cheese, tomato, sriracha mayo & hash browns, on an everything bagel. Contains eggs, milk, wheat, soy, and sesame seeds',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'Breakfast Sandwich',
       price: '$7.49',
       description:
         'Scrambled egg, cheddar cheese and choice of meat on toasted bread. Contains eggs, milk, wheat, and soy',
+      tags: ["Breakfast", "American"]
     },
   ],
   'Breakfast Burritos': [
@@ -158,24 +171,28 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$10.49',
       description:
         'Two scrambled eggs, choice of meat, hash browns and cheddar cheese, wrapped in a flour tortilla with salsa. Contains eggs, milk, soy, and wheat',
+      tags: ["Breakfast"]
     },
     {
       name: 'Elbee Burrito',
       price: '$13.99',
       description:
         'Two scrambled eggs, smoked bacon, hash browns, cheddar cheese, avocado and chipotle sauce. Contains eggs, milk, soy, and wheat',
+      tags: ["Breakfast"]
     },
     {
       name: 'Spam & Egg Burrito',
       price: '$9.99',
       description:
         'Grilled spam, scrambled eggs, green onion, white rice and sriracha mayo. Contains eggs, wheat, soy, and milk',
+      tags: ["Breakfast"]
     },
     {
       name: 'Spinach and Mushroom Burrito',
       price: '$8.99',
       description:
         'Two scrambled eggs, hash browns, sautéed spinach and mushroom, wrapped in a flour tortilla. Contains eggs, soy, and wheat',
+      tags: ["Breakfast"]
     },
   ],
   'Breakfast Bowls': [
@@ -184,18 +201,21 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$10.99',
       description:
         'Two scrambled eggs, choice of meat, hash browns and cheddar cheese, with salsa. Contains eggs, milk, soy, and wheat',
+      tags: ["Breakfast"]
     },
     {
       name: 'Spam & Egg Bowl',
       price: '$10.99',
       description:
         'Two scrambled eggs, grilled Spam, white rice and green onions, drizzled with sriracha mayo. Contains eggs, soy, and milk',
+      tags: ["Breakfast"]
     },
     {
       name: 'Loco Moco',
       price: '$9.99',
       description:
         'A sunny side egg served on a juicy charbroiled beef patty over white rice with savory onion and mushroom gravy. Contains eggs and soy',
+      tags: ["Breakfast"]
     },
   ],
   'Breakfast Sides': [
@@ -204,22 +224,26 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$2.49',
       description:
         'Choice of wheat, sourdough, or English muffin, with butter. Contains soy and wheat',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'Bagel with Cream Cheese',
       price: '$4.49',
       description:
         'Choice of plain or everything bagel. Contains milk, wheat, and sesame seeds',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'Side of Smoked Bacon',
       price: '$2.99',
       description: '3 Slices of smoked bacon',
+      tags: ["Breakfast", "American"]
     },
     {
       name: 'Side of Hash Brown',
       price: '$2.69',
       description: 'Shredded hash brown potatoes. Contains soy',
+      tags: ["Breakfast", "American"]
     },
   ],
   'Charbroiled Burgers': [
@@ -228,54 +252,63 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$9.49',
       description:
         'Beef patty, pepper jack cheese, chipotle dressing, jalapeños, lettuce, tomato, red onion, avocado and pickles. Contains eggs, milk, soy, and wheat',
+      tags: ["Burgers", "American"]
     },
     {
       name: 'Hamburger',
       price: '$7.89',
       description:
         'Beef patty, Thousand Island dressing, lettuce, tomato, red onion and pickles. Contains eggs, milk, soy, and wheat',
+      tags: ["Burgers", "American"]
     },
     {
       name: 'Turkey Burger',
       price: '$7.39',
       description:
         'Turkey patty, Thousand Island dressing, lettuce, tomato, red onion and pickles. Contains eggs, soy, and wheat',
+      tags: ["Burgers", "American"]
     },
     {
       name: 'BBQ Bacon Cheeseburger',
       price: '$9.79',
       description:
         "Beef patty, smoked bacon, cheddar cheese, onion ring and Sweet Baby Ray's® BBQ sauce. Contains milk, soy, and wheat",
+      tags: ["Burgers", "American"]
     },
     {
       name: 'Gardenburger®',
       price: '$7.89',
       description:
         'Gardenburger® veggie patty, Thousand Island dressing, lettuce, tomato, red onion and pickles. Contains eggs, milk, soy, and wheat',
+      tags: ["Burgers", "American"]
     },
     {
       name: 'Bacon Cheeseburger',
       price: '$9.69',
       description:
         'Beef patty, smoked bacon, cheddar cheese, Thousand Island dressing, lettuce, tomato, red onion and pickles. Contains eggs, soy, and wheat',
+      tags: ["Burgers", "American"]
     },
     {
       name: 'Brunch Burger',
       price: '$12.29',
       description:
         'Beef patty, over medium egg, hash brown patty, smoked bacon and cheddar cheese. Contains eggs, milk, soy, and wheat',
+      tags: ["Burgers", "American"]
     },
     {
       name: 'Hawaiian Cheeseburger',
       price: '$8.99',
       description:
         'Beef patty, Swiss cheese, grilled pineapple, teriyaki sauce, lettuce, tomato, red onion and pickles. Contains eggs, milk, soy, wheat, and sesame seeds',
+      tags: ["Burgers", "American"]
     },
     {
       name: 'Mushroom & Swiss Cheeseburger',
       price: '$10.49',
       description:
         'Beef patty, Swiss cheese, sautéed mushrooms and caramelized onion. Contains eggs, milk, soy, and wheat',
+      tags: ["Burgers", "American"]
     },
   ],
   Bowls: [
@@ -328,6 +361,7 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$10.99',
       description:
         'Charbroiled chicken breast, avocado, lettuce, BBQ Sauce, tomato, black beans, corn, cheddar cheese and chipotle dressing. Contains eggs, milk, and soy',
+      tags: ["American"]
     },
     {
       name: 'Sesame Chicken',
@@ -340,23 +374,27 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$12.29',
       description:
         'Crispy southern-style fried chicken, lettuce, tomato, cucumber, bacon, corn, cheddar cheese and honey Dijon dressing. Contains eggs, soy, and wheat',
+      tags: ["American"]
     },
     {
       name: 'Chicken Caesar',
       price: '$10.99',
       description:
         'Charbroiled chicken breast, lettuce, parmesan cheese, croutons and Caesar dressing. Contains eggs, milk, fish, and soy',
+      tags: ["American"]
     },
     {
       name: 'Buffalo Crispy Chicken',
       price: '$10.29',
       description:
         'Crispy southern-style fried chicken, lettuce, buffalo sauce, cucumber, shredded carrots, celery and ranch dressing. Contains eggs, milk, soy, and wheat',
+      tags: ["American"]
     },
     {
       name: 'Garden Side Salad',
       price: '$3.29',
       description: 'Lettuce, tomato, cucumber and choice of dressing',
+      tags: ["American"]
     },
   ],
   Sandwiches: [
@@ -365,42 +403,49 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$8.49',
       description:
         'Roasted deli turkey, avocado, cheddar cheese, lettuce, and tomato, on grilled sourdough bread. Contains milk, soy, and wheat',
+      tags: ["American"]
     },
     {
       name: 'Honey Crisp Chicken',
       price: '$7.69',
       description:
         'Crispy southern-style fried chicken tenderloins, honey Dijon dressing and pickles. Contains eggs, soy​, and wheat',
+      tags: ["American"]
     },
     {
       name: 'BBQ Pulled Pork Sandwich',
       price: '$6.79',
       description:
         "Roasted pork carnitas, Sweet Baby Ray's® BBQ sauce and coleslaw. Contains eggs, milk, soy, and wheat",
+      tags: ["American"]
     },
     {
       name: 'Chicken Sandwich',
       price: '$9.29',
       description:
         'Charbroiled chicken breast, pepper jack cheese, chipotle sauce, tomato, red onion, pickles and lettuce. Contains eggs, milk, soy, and wheat',
+      tags: ["American"]
     },
     {
       name: 'Chicken Pesto Sandwich',
       price: '$10.29',
       description:
         'Charbroiled chicken breast, provolone cheese, creamy pesto sauce, lettuce and tomato. Contains milk, soy, and wheat',
+      tags: ["American"]
     },
     {
       name: 'BLT',
       price: '$7.29',
       description:
         'Smoked bacon, lettuce and tomato, with mayo, on toasted sourdough bread. Contains soy and wheat',
+      tags: ["American"]
     },
     {
       name: 'Turkey and Bacon Sandwich',
       price: '$8.99',
       description:
         'Roasted deli turkey, smoked bacon, mayo, lettuce & tomatoes, on toasted sourdough bread. Contains eggs, soy, and wheat',
+      tags: ["American"]
     },
     {
       name: 'Falafel Sandwich',
@@ -413,6 +458,7 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$8.49',
       description:
         'Beef patty, cheddar cheese, grilled onions and Thousand Island dressing, on grilled sourdough bread. Contains eggs, milk, soy, and wheat',
+      tags: ["American"]
     },
   ],
   'Grilled Cheese': [
@@ -421,6 +467,7 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$5.49',
       description:
         'Cheddar & mozzarella cheese on grilled sourdough bread. Contains milk, soy, and wheat',
+      tags: ["American"]
     },
   ],
   "Papa John's Pizza": [
@@ -429,33 +476,39 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$6.99',
       description:
         '8" pizza with real cheese made from mozzarella, and signature pizza sauce',
+      tags: ["Pizza"]
     },
     {
       name: 'Pepperoni Pizza',
       price: '$7.29',
       description: '8" pizza with premium pepperoni',
+      tags: ["Pizza"]
     },
     {
       name: 'Pepperoni & Sausage Pizza',
       price: '$7.49',
       description: '8" pizza with premium pepperoni and Italian sausage',
+      tags: ["Pizza"]
     },
     {
       name: 'The Works Pizza',
       price: '$8.99',
       description:
         '8" pizza with Italian sausage, Canadian bacon, mushroom, green pepper, onion, black olives & pepperoni',
+      tags: ["Pizza"]
     },
     {
       name: 'Hawaiian BBQ Chicken Pizza',
       price: '$7.99',
       description: '8" pizza with BBQ sauce, bacon, chicken, onion & pineapple',
+      tags: ["Pizza"]
     },
     {
       name: 'Garden Fresh Pizza',
       price: '$7.79',
       description:
         '8" pizza with mushroom, green pepper, onion, black olives & tomato',
+      tags: ["Pizza"]
     },
   ],
   'Pizza Sides': [
@@ -463,22 +516,26 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       name: 'PJ Wings (6 Piece)',
       price: '$9.79',
       description: 'Choice of Sauce: Honey Chipotle, BBQ sauce, and Buffalo',
+      tags: ["Pizza"]
     },
     {
       name: 'PJ Wings (8 Piece)',
       price: '$12.49',
       description: 'Choice of Sauce: Honey Chipotle, BBQ sauce, and Buffalo',
+      tags: ["Pizza"]
     },
     {
       name: 'Garlic Knotts',
       price: '$5.99',
       description: 'Freshly baked dough knots topped with garlic sauce',
+      tags: ["Pizza"]
     },
     {
       name: 'Cheese Sticks',
       price: '$6.49',
       description:
         'Fresh dough covered with special garlic sauce and mozzarella cheese',
+        tags: ["Pizza"]
     },
   ],
   'Appetizers & Fries': [
@@ -499,23 +556,27 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$7.89',
       description:
         'Crispy southern-style fried chicken tenderloins. Contains wheat and soy',
+        tags: ["American"]
     },
     {
       name: 'Fries',
       price: '$3.09',
       description:
         'House-seasoned fries with salt, pepper & garlic. Contains soy',
+      tags: ["American"]
     },
     {
       name: 'Onion Rings',
       price: '$4.49',
       description: 'Crispy beer-battered onion rings. Contains soy and wheat',
+      tags: ["American"]
     },
     {
       name: 'Spicy Cauliflower Bites',
       price: '$4.99',
       description:
         'Fried Cauliflower florets in spicy batter made with Aleppo pepper & cumin, served with ranch dressing. Contains milk, soy, and wheat',
+      tags: ["American"]
     },
   ],
   'All Day Breakfast': [
@@ -524,12 +585,14 @@ const outpostMenuItems: Record<string, MenuItem[]> = {
       price: '$7.49',
       description:
         'Scrambled egg, cheddar cheese and smoked bacon on toasted bread. Contains eggs, milk, wheat, and soy',
+      tags: ["Breakfast"]
     },
     {
       name: 'Breakfast Wrap',
       price: '$10.49',
       description:
         'Two scrambled eggs, smoked bacon, and cheddar cheese, wrapped in a flour tortilla with salsa. Contains eggs, milk, soy, and wheat',
+      tags: ["Breakfast"]
     },
   ],
   Beverages: [
@@ -617,20 +680,62 @@ export default function RestaurantDetail() {
   const totalReviews = mockReviews.length;
   const isFoodTruck = location.category === 'Food Trucks';
 
+  const normalizeMenu = (menu: { name: string; items: any[] }[]): Record<string, MenuItem[]> => {
+  return Object.fromEntries(
+    menu.map((category) => [
+      category.name,
+      category.items.map((item) => ({
+        name: item.name,
+        description: item.description,
+        price: typeof item.price === "number" ? `$${item.price.toFixed(2)}` : item.price,
+        tags: item.tags ?? [],
+      })),
+    ])
+  );
+  };
+
+  const MENU_REGISTRY: Record<string, Record<string, MenuItem[]>> = {
+  "outpost-grill": outpostMenuItems,
+  "shake-smart": normalizeMenu(shakeSmartMenu),
+  "nugget-grill-express": normalizeMenu(nuggetGrillExpressMenu),
+  };
+
   // Select menu based on location
-  const menuItems =
-    location.id === 'shake-smart'
-      ? Object.fromEntries(
-          shakeSmartMenu.map((category) => [
-            category.name,
-            category.items.map((item) => ({
-              name: item.name,
-              price: `$${item.price.toFixed(2)}`,
-              description: item.description,
-            })),
-          ])
-        )
-      : outpostMenuItems;
+  const menuItems = MENU_REGISTRY[location.id] ?? outpostMenuItems;
+
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
+    const hasActiveFilters = selectedTags.length > 0;
+
+    const toggleTag = (tag: string) => {
+      setSelectedTags((prev) =>
+        prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+      );
+    };
+
+  const clearTags = () => setSelectedTags([]);
+
+  const filteredMenu = useMemo(() => {
+  if (!hasActiveFilters) return menuItems;
+
+  const sel = selectedTags.map((t) => t.toLowerCase());
+
+  const kept = Object.entries(menuItems).map(([category, items]) => {
+    const categoryMatches = sel.some((t) =>
+      category.toLowerCase().includes(t)
+    );
+    if (categoryMatches) return [category, items] as const;
+
+    const filteredItems = items.filter((item) => {
+      if (!item.tags?.length) return false;
+      const itemTagsLower = item.tags.map((t) => t.toLowerCase());
+      return sel.some((t) => itemTagsLower.includes(t));
+    });
+
+    return [category, filteredItems] as const;
+  });
+
+  return Object.fromEntries(kept.filter(([, items]) => items.length > 0));
+  }, [menuItems, hasActiveFilters, selectedTags]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -832,12 +937,15 @@ export default function RestaurantDetail() {
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {location.tags.map((tag) => (
-                  <span
+                  <Button
                     key={tag}
-                    className="inline-flex items-center rounded-md bg-muted px-2.5 py-1 text-sm font-medium"
+                    size="sm"
+                    variant={selectedTags.includes(tag) ? "default" : "outline"}
+                    onClick={() => toggleTag(tag)}
+                    className="px-2.5 py-1 text-sm font-medium border border-border transition-colors"
                   >
                     {tag}
-                  </span>
+                  </Button>
                 ))}
               </div>
             </section>
@@ -879,7 +987,7 @@ export default function RestaurantDetail() {
               </div>
 
               <div className="space-y-6">
-                {Object.entries(menuItems).map(([category, items]) => (
+                {Object.entries(filteredMenu).map(([category, items]) => (
                   <div key={category}>
                     <h3 className="mb-3 text-lg font-bold">{category}</h3>
                     <div className="space-y-2">
