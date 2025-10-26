@@ -145,7 +145,6 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Best Burgers',
-    mapLabel: '',
     description: 'Chargrilled burgers, sandwiches, and fresh salads',
     hours: {
       Mon: '10:00 AM - 2:00 PM',
