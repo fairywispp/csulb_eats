@@ -25,7 +25,7 @@ export interface Location {
     order?: string;
     directions?: string;
   };
-  mapLabel: string;
+  mapLabel?: string;
   description?: string;
 }
 
