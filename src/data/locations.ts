@@ -25,6 +25,7 @@ export interface Location {
     order?: string;
     directions?: string;
   };
+  mapLabel: string;
   description?: string;
 }
 
@@ -35,6 +36,7 @@ export const locations: Location[] = [
     rating: 4.6,
     category: 'Restaurants',
     subcategory: 'American',
+    mapLabel: 'Near the SS/PA and VEC buildings',
     description:
       'All-day American grill serving breakfast, charbroiled burgers, sandwiches, bowls, salads, and pizza. From fluffy pancakes to juicy burgers and signature pizzas, Outpost Grill has something for every craving.',
     hours: {
@@ -50,7 +52,7 @@ export const locations: Location[] = [
     image: outpostGrillImg,
     tags: ['Burgers', 'Breakfast', 'American', 'Pizza'],
     links: {
-      menu: "https://www.csulb.edu/beach-shops/outpost-grill-menu",
+      menu: 'https://www.csulb.edu/beach-shops/outpost-grill-menu',
       order:
         'https://www.grubhub.com/about/campus?utm_source=campus-partner-email&%243p=e_ab&%24original_url=https%3A%2F%2Fwww.grubhub.com%2Fcampus%2Fadd-campus%2F29287%3Futm_source%3Dcampus-partner-email&utm_medium=email_partner&utm_campaign=campus_2020bts_appinstall&utm_content=promo_3offpickup_newdiner&utm_term=allcampus',
       directions: 'https://map.concept3d.com/?id=1314#!m/420437',
@@ -62,6 +64,7 @@ export const locations: Location[] = [
     rating: 4.6,
     category: 'Restaurants',
     subcategory: 'Smoothies & Bowls',
+    mapLabel: 'Inside the SRWC',
     description:
       'Premium smoothies, protein shakes, and acai bowls made with fresh ingredients. Perfect for a healthy meal or post-workout refuel with customizable options to fit your nutritional goals.',
     hours: {
@@ -78,7 +81,7 @@ export const locations: Location[] = [
     tags: ['Smoothies', 'Acai Bowls', 'Healthy', 'Protein Shakes'],
     links: {
       menu: 'https://self-ordering.shakesmart.com/order/venue/34/full-menu',
-      order: "https://self-ordering.shakesmart.com/order/signin",
+      order: 'https://self-ordering.shakesmart.com/order/signin',
       directions: 'https://map.concept3d.com/?id=1314#!m/569184?share',
     },
   },
@@ -88,6 +91,7 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Cafés',
     subcategory: 'Coffee & Energy Drinks',
+    mapLabel: 'Inside the University Library',
     description:
       'Specialty coffee and energy drinks in a modern setting. Perfect spot for studying or grabbing a quick caffeine boost between classes.',
     hours: {
@@ -114,6 +118,7 @@ export const locations: Location[] = [
     rating: 4.4,
     category: 'Restaurants',
     subcategory: 'American',
+    mapLabel: 'Near Friendship Walk - CHHS West Lawn',
     description: 'Quick American grill serving burgers, sandwiches, and more',
     hours: {
       Mon: '8:00 AM - 5:00 PM',
@@ -128,9 +133,10 @@ export const locations: Location[] = [
     image: nuggetGrillExpressImg,
     tags: ['Burgers', 'Sandwiches', 'American'],
     links: {
-      menu: "https://order.toasttab.com/online/the-nugget-trailer-6049-east-7th-street",
+      menu: 'https://order.toasttab.com/online/the-nugget-trailer-6049-east-7th-street',
       order: undefined,
-      directions: 'https://map.concept3d.com/?id=1314#!bm/?ce/42540?ct/72432,91209,91380,91668,95852,91382,91383,42540?m/1075950?s/',
+      directions:
+        'https://map.concept3d.com/?id=1314#!bm/?ce/42540?ct/72432,91209,91380,91668,95852,91382,91383,42540?m/1075950?s/',
     },
   },
   {
@@ -139,6 +145,7 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Best Burgers',
+    mapLabel: '',
     description: 'Chargrilled burgers, sandwiches, and fresh salads',
     hours: {
       Mon: '10:00 AM - 2:00 PM',
@@ -163,6 +170,7 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Fusion',
+    mapLabel: '',
     description: 'Fusion of Thai and Mexican flavors in every bite',
     hours: {
       Mon: '11:00-14:00',
@@ -183,6 +191,7 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Sweet Treats',
+    mapLabel: '',
     description: 'Authentic French crepes, both sweet and savory',
     hours: {
       Mon: '11:00-14:00',
@@ -203,6 +212,7 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Food Trucks',
     subcategory: 'Quick Bites',
+    mapLabel: '',
     description: 'Fresh-baked pretzels with a variety of flavors and dips',
     hours: {
       Mon: '10:00-15:00',
@@ -223,6 +233,7 @@ export const locations: Location[] = [
     rating: 4.6, // Placeholder
     category: 'Cafés',
     subcategory: 'Coffee & Snacks',
+    mapLabel: '',
     description: 'Coffee, pastries, and quick bites near student spaces.',
     hours: {
       Mon: '8:00 AM - 4:00 PM',
