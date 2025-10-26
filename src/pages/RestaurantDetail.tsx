@@ -616,6 +616,9 @@ export default function RestaurantDetail() {
   const avgRating = location.rating;
   const totalReviews = mockReviews.length;
   const isFoodTruck = location.category === 'Food Trucks';
+  const campusMapLabel =
+    location.mapLabel ??
+    (location.id === 'habit-grill' ? 'Lower Campus' : 'Upper Campus');
 
   // Select menu based on location
   const menuItems =
@@ -803,15 +806,12 @@ export default function RestaurantDetail() {
             </div>
 
             {/* Map Widget */}
-            {['outpost-grill', 'shake-smart'].includes(location.id) ||
-            isFoodTruck ? (
+            {['outpost-grill', 'shake-smart', 'nugget-grill-express'].includes(
+              location.id
+            ) || isFoodTruck ? (
               <CampusMapWidget
                 locationName={location.name}
-                campusLocation={
-                  location.id === 'habit-grill'
-                    ? 'Lower Campus'
-                    : 'Upper Campus'
-                }
+                campusLocation={campusMapLabel}
                 directionsLink={location.links.directions}
               />
             ) : (
