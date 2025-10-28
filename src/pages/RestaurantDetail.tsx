@@ -642,7 +642,7 @@ export default function RestaurantDetail() {
         <img
           src={location.image}
           alt={location.name}
-          className="h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-contain bg-black"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80" />
         <div className="absolute bottom-0 left-0 right-0 pb-8">
