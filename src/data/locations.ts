@@ -5,7 +5,7 @@ import crepesBonaparteImg from '@/assets/restaurants/crepes-bonaparte.webp';
 import wetzelsPretzelImg from '@/assets/restaurants/wetzels-pretzel.jpg';
 import caffeineLabImg from '@/assets/restaurants/caffeine-lab.jpg';
 import chillsideCafeIcon from '@/assets/restaurants/chillside-cafe-icon.png';
-import outpostGrillImg from '@/assets/restaurants/outpost-grill.jpg';
+import outpostGrillImg from '@/assets/restaurants/outpost_logo.png';
 import nuggetGrillExpressImg from '@/assets/restaurants/nuggetgrill-express-1.jpg';
 
 export interface Location {
